@@ -69,10 +69,21 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())
                     add("implementation", libs.findLibrary("compose-navigation").get())
+
+                    add("implementation", libs.findBundle("retrofit").get())
+
+                    add("implementation", libs.findLibrary("hilt-android").get())
+                    add("ksp", libs.findLibrary("hilt-android-compiler").get())
+
+                    add("implementation", libs.findLibrary("room-runtime").get())
+                    add("implementation", libs.findLibrary("room-ktx").get())
+                    add("ksp", libs.findLibrary("room-compiler").get())
+
+                    add("implementation", libs.findLibrary("datastore-preferences").get())
+
+                    add("implementation", libs.findLibrary("serialization").get())
                 }
             }
-
-
         }
     }
 }

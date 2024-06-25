@@ -12,6 +12,9 @@ dependencies {
 
 gradlePlugin {
     plugins {
-
+        register("AndroidApplicationPlugin") {
+            id = "android.app.convention"
+            implementationClass = "com.juhyeon.calendar.convention.AndroidApplicationConventionPlugin"
+        }
     }
 }

@@ -18,4 +18,5 @@ plugins {
     alias(libs.plugins.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.serialization) apply false
+    id("android.app.convention") apply false
 }
