@@ -18,3 +18,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Calendar"
 include(":app")
+include(":shared:core-mvi")
+include(":shared:domain")
+include(":shared:data")
+include(":shared:util:kotlin")

@@ -16,5 +16,25 @@ gradlePlugin {
             id = "android.app.convention"
             implementationClass = "com.juhyeon.calendar.convention.AndroidApplicationConventionPlugin"
         }
+        register("FeaturePlugin") {
+            id = "android.feature.convention"
+            implementationClass = "com.juhyeon.calendar.convention.FeatureConventionPlugin"
+        }
+        register("KotlinPlugin") {
+            id = "android.kotlin.convention"
+            implementationClass = "com.juhyeon.calendar.convention.KotlinConventionPlugin"
+        }
+        register("DataPlugin") {
+            id = "android.data.convention"
+            implementationClass = "com.juhyeon.calendar.convention.DataConventionPlugin"
+        }
+        register("SharedLibraryPlugin") {
+            id = "android.library.convention"
+            implementationClass = "com.juhyeon.calendar.convention.SharedLibraryConventionPlugin"
+        }
+        register("DomainPlugin") {
+            id = "android.domain.convention"
+            implementationClass = "com.juhyeon.calendar.convention.DomainConventionPlugin"
+        }
     }
 }

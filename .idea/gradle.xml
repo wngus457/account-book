@@ -24,6 +24,12 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
+            <option value="$PROJECT_DIR$/shared" />
+            <option value="$PROJECT_DIR$/shared/core-mvi" />
+            <option value="$PROJECT_DIR$/shared/data" />
+            <option value="$PROJECT_DIR$/shared/domain" />
+            <option value="$PROJECT_DIR$/shared/util" />
+            <option value="$PROJECT_DIR$/shared/util/kotlin" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
