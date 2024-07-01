@@ -66,6 +66,15 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
 
                 dependencies {
+                    add("implementation", project(":shared:core-mvi"))
+                    add("implementation", project(":shared:domain"))
+                    add("implementation", project(":shared:data"))
+                    add("implementation", project(":shared:local"))
+                    add("implementation", project(":shared:ui:common"))
+                    add("implementation", project(":shared:ui:system"))
+                    add("implementation", project(":shared:util:android"))
+                    add("implementation", project(":shared:util:kotlin"))
+
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())
                     add("implementation", libs.findLibrary("compose-navigation").get())
