@@ -1,8 +1,11 @@
 package com.juhyeon.calendar.convention
 
-import com.android.build.api.dsl.ApplicationExtension
-import com.juhyeon.calendar.convention.config.AppConfig
+import com.android.build.api.dsl.LibraryExtension
 import com.juhyeon.calendar.convention.config.configureCommonExtension
+import com.juhyeon.calendar.convention.config.debug
+import com.juhyeon.calendar.convention.config.kotlin
+import com.juhyeon.calendar.convention.config.release
+import com.juhyeon.calendar.convention.config.sourceSets
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -10,33 +13,21 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-class AndroidApplicationConventionPlugin : Plugin<Project> {
+class FeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.android.application")
-                apply("org.jetbrains.kotlin.android")
-                apply("dagger.hilt.android.plugin")
+                apply("com.android.library")
+                apply("kotlin-android")
                 apply("com.google.devtools.ksp")
-                apply("org.jetbrains.kotlin.plugin.serialization")
+                apply("kotlin-parcelize")
             }
 
-            extensions.configure<ApplicationExtension> {
+            extensions.configure<LibraryExtension> {
                 configureCommonExtension(this)
-
-                defaultConfig {
-                    applicationId = "com.juhyeon.calendar"
-                    versionCode = AppConfig.versionCode
-                    versionName = AppConfig.versionName
-                    targetSdk = 34
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                    vectorDrawables.useSupportLibrary = true
-                }
-
                 buildTypes {
                     release {
                         isMinifyEnabled = true
-                        isShrinkResources = true
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
                             "proguard-rules.pro"
@@ -44,19 +35,26 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     }
                     debug {
 //                        isMinifyEnabled = true
-//                        isShrinkResources = true
 //                        proguardFiles(
 //                            getDefaultProguardFile("proguard-android-optimize.txt"),
 //                            "proguard-rules.pro"
 //                        )
-                        enableAndroidTestCoverage = true
-                        enableUnitTestCoverage = true
                     }
                 }
 
                 buildFeatures {
                     compose = true
-                    buildConfig = true
+                }
+
+                kotlin {
+                    sourceSets {
+                        debug {
+                            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+                        }
+                        release {
+                            kotlin.srcDir("build/generated/ksp/release/kotlin")
+                        }
+                    }
                 }
 
                 val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -68,8 +66,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 dependencies {
                     add("implementation", project(":shared:core-mvi"))
                     add("implementation", project(":shared:domain"))
-                    add("implementation", project(":shared:data"))
-                    add("implementation", project(":shared:local"))
                     add("implementation", project(":shared:ui:common"))
                     add("implementation", project(":shared:ui:system"))
                     add("implementation", project(":shared:util:android"))
@@ -77,20 +73,14 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())
-                    add("implementation", libs.findLibrary("compose-navigation").get())
 
-                    add("implementation", libs.findBundle("retrofit").get())
+                    add("implementation", libs.findLibrary("coil-core").get())
+                    add("implementation", libs.findLibrary("coil-compose").get())
 
                     add("implementation", libs.findLibrary("hilt-android").get())
                     add("ksp", libs.findLibrary("hilt-android-compiler").get())
 
-                    add("implementation", libs.findLibrary("room-runtime").get())
-                    add("implementation", libs.findLibrary("room-ktx").get())
-                    add("ksp", libs.findLibrary("room-compiler").get())
-
-                    add("implementation", libs.findLibrary("datastore-preferences").get())
-
-                    add("implementation", libs.findLibrary("serialization").get())
+                    add("implementation", libs.findLibrary("accompanist-permission").get())
                 }
             }
         }
