@@ -59,10 +59,10 @@ compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation-animation" }
 compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "compose-hilt-navigation" }
 
-coil-compose = { group = "io.coil.kt", name = "coil-compose", version.ref = "compose-coil" }
-coil-core = { group = "io.coil.kt", name = "coil", version.ref = "compose-coil" }
-coil-gif = { group = "io.coil.kt", name = "coil-gif", version.ref = "compose-coil" }
-coil-svg = { group = "io.coil.kt", name = "coil-svg", version.ref = "compose-coil" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "compose-coil" }
+coil-core = { group = "io.coil-kt", name = "coil", version.ref = "compose-coil" }
+coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "compose-coil" }
+coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "compose-coil" }
 
 accompanist-permission = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 
