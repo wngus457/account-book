@@ -72,6 +72,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", project(":shared:domain"))
                     add("implementation", project(":shared:data"))
                     add("implementation", project(":shared:local"))
+                    add("implementation", project(":shared:navigation"))
                     add("implementation", project(":shared:ui:common"))
                     add("implementation", project(":shared:ui:system"))
                     add("implementation", project(":shared:util:android"))

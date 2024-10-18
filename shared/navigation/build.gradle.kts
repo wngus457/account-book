@@ -1,9 +1,9 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.kotlin.jvm)
+    id("android.kotlin.convention")
+    alias(libs.plugins.serialization)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+dependencies {
+    implementation(libs.coroutine.core.jvm)
+    implementation(libs.serialization)
 }
