@@ -31,6 +31,7 @@
             <option value="$PROJECT_DIR$/shared/data" />
             <option value="$PROJECT_DIR$/shared/domain" />
             <option value="$PROJECT_DIR$/shared/local" />
+            <option value="$PROJECT_DIR$/shared/navigation" />
             <option value="$PROJECT_DIR$/shared/ui" />
             <option value="$PROJECT_DIR$/shared/ui/common" />
             <option value="$PROJECT_DIR$/shared/ui/system" />

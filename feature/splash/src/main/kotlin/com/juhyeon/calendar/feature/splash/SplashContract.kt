@@ -6,12 +6,12 @@ import com.juhyeon.calendar.shared.core.mvi.UiState
 
 interface SplashContract {
     sealed interface Event : UiEvent {
-
+        data object OnBackClick : Event
     }
 
     data object State : UiState
 
     sealed interface Effect : UiEffect {
-
+        data object NavigateToBack : Effect
     }
 }
