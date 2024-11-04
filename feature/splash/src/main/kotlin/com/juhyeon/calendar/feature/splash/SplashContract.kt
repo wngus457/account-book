@@ -13,5 +13,6 @@ interface SplashContract {
 
     sealed interface Effect : UiEffect {
         data object NavigateToBack : Effect
+        data object NavigateToHome : Effect
     }
 }

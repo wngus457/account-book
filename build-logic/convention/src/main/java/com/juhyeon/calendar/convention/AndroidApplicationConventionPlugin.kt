@@ -67,6 +67,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
                 dependencies {
                     add("implementation", project(":feature:splash"))
+                    add("implementation", project(":feature:home"))
 
                     add("implementation", project(":shared:core-mvi"))
                     add("implementation", project(":shared:domain"))
@@ -81,6 +82,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())
                     add("implementation", libs.findLibrary("compose-navigation").get())
+
+                    add("implementation", libs.findLibrary("accompainst-system-ui").get())
 
                     add("implementation", libs.findBundle("retrofit").get())
 

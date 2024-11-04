@@ -12,10 +12,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.juhyeon.calendar.feature.home.HomeScreen
 import com.juhyeon.calendar.feature.splash.SplashScreen
 import com.juhyeon.calendar.network.NetworkContract
 import com.juhyeon.calendar.network.NetworkViewModel
-import com.juhyeon.calendar.shared.navigation.Splash
+import com.juhyeon.calendar.shared.navigation.NavigationRouteId
 import com.juhyeon.calendar.shared.ui.common.extension.noAnimComposable
 import com.juhyeon.calendar.shared.ui.system.theme.Normal14
 import com.juhyeon.calendar.shared.ui.system.theme.modal.Modal
@@ -47,10 +48,14 @@ fun RootNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Splash
+        startDestination = NavigationRouteId.Splash
     ) {
-        noAnimComposable<Splash> {
+        noAnimComposable<NavigationRouteId.Splash> {
             SplashScreen(navController)
+        }
+
+        noAnimComposable<NavigationRouteId.Home> {
+            HomeScreen(navController)
         }
     }
 }

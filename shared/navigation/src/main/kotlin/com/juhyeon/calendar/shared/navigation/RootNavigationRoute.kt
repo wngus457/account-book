@@ -2,5 +2,16 @@ package com.juhyeon.calendar.shared.navigation
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-data object Splash
+sealed class NavigationRouteId {
+    @Serializable
+    data object Splash : NavigationRouteId()
+
+    @Serializable
+    data object Home : NavigationRouteId()
+
+    @Serializable
+    data object Setting : NavigationRouteId()
+
+    @Serializable
+    data object History : NavigationRouteId()
+}
