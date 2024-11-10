@@ -10,6 +10,7 @@ dependencies {
     implementation(projects.shared.coreMvi)
     implementation(projects.shared.ui.common)
     implementation(projects.shared.util.android)
+    implementation(projects.shared.navigation)
 
     implementation(libs.compose.navigation)
 

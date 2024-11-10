@@ -70,6 +70,7 @@ class FeatureConventionPlugin : Plugin<Project> {
                     add("implementation", project(":shared:ui:system"))
                     add("implementation", project(":shared:util:android"))
                     add("implementation", project(":shared:util:kotlin"))
+                    add("implementation", project(":shared:navigation"))
 
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())

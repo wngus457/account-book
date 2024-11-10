@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.juhyeon.calendar.shared.navigation.NavigationRouteId
 import com.juhyeon.calendar.shared.ui.system.theme.White100
 
 @Composable
@@ -17,13 +18,14 @@ fun SplashScreen(
     navController: NavHostController,
     splashViewModel: SplashViewModel = hiltViewModel()
 ) {
-    val state = splashViewModel.state.collectAsState().value
+    val state = splashViewModel.stateFlow.collectAsState().value
     val postEvent = splashViewModel.eventHandler
 
     LaunchedEffect(true) {
-        splashViewModel.effect.collect { effect ->
+        splashViewModel.effectFlow.collect { effect ->
             when (effect) {
                 SplashContract.Effect.NavigateToBack -> navController.popBackStack()
+                SplashContract.Effect.NavigateToHome -> navController.navigate(NavigationRouteId.Home)
             }
         }
     }

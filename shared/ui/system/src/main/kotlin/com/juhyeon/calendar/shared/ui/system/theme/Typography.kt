@@ -15,8 +15,20 @@ val font = FontFamily(
     Font(R.font.pretendard_bold, weight = FontWeight.Bold),
     Font(R.font.pretendard_light, weight = FontWeight.Light),
     Font(R.font.pretendard_semibold, weight = FontWeight.SemiBold),
-    Font(R.font.pretendard_medium, weight = FontWeight.Medium)
+    Font(R.font.pretendard_medium, weight = FontWeight.Medium),
+    Font(R.font.departure_regular, weight = FontWeight.Normal)
 )
+
+val fontDeparture = FontFamily(Font(R.font.departure_regular, weight = FontWeight.Normal))
+
+val Typography.Departure8: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 8.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
 
 val Typography.Normal8: TextStyle
     @Composable
@@ -51,6 +63,15 @@ val Typography.Bold8: TextStyle
         fontSize = 8.textDp,
         fontWeight = FontWeight.Bold,
         fontFamily = font,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
+val Typography.Departure10: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 10.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
@@ -90,6 +111,15 @@ val Typography.Bold10: TextStyle
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
+val Typography.Departure11: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 11.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal11: TextStyle
     @Composable
     get() = TextStyle(
@@ -125,6 +155,16 @@ val Typography.Bold11: TextStyle
         fontFamily = font,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
+
+val Typography.Departure12: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 12.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal12: TextStyle
     @Composable
     get() = TextStyle(
@@ -158,6 +198,15 @@ val Typography.Bold12: TextStyle
         fontSize = 12.textDp,
         fontWeight = FontWeight.Bold,
         fontFamily = font,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
+val Typography.Departure13: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 13.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
@@ -197,6 +246,15 @@ val Typography.Bold13: TextStyle
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 
+val Typography.Departure14: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 14.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal14: TextStyle
     @Composable
     get() = TextStyle(
@@ -232,6 +290,16 @@ val Typography.Bold14: TextStyle
         fontFamily = font,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
+
+val Typography.Departure15: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 15.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal15: TextStyle
     @Composable
     get() = TextStyle(
@@ -267,6 +335,16 @@ val Typography.Bold15: TextStyle
         fontFamily = font,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
+
+val Typography.Departure16: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 16.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal16: TextStyle
     @Composable
     get() = TextStyle(
@@ -302,6 +380,16 @@ val Typography.Bold16: TextStyle
         fontFamily = font,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
+
+val Typography.Departure17: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 17.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal17: TextStyle
     @Composable
     get() = TextStyle(
@@ -337,6 +425,16 @@ val Typography.Bold17: TextStyle
         fontFamily = font,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
+
+val Typography.Departure18: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontSize = 18.textDp,
+        fontWeight = FontWeight.Normal,
+        fontFamily = fontDeparture,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
+    )
+
 val Typography.Normal18: TextStyle
     @Composable
     get() = TextStyle(

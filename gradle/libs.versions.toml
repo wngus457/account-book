@@ -3,10 +3,10 @@
 android-gradle-plugin = "8.2.2"
 
 # Compose
-compose-compiler = "1.5.5"
-compose-bom = "2024.09.00"
-compose-navigation-animation = "2.8.0"
-compose-runtime-tracing = "1.0.0-beta01"
+compose-compiler = "1.5.14"
+compose-bom = "2024.10.01"
+compose-navigation-animation = "2.8.3"
+compose-runtime-tracing = "1.7.5"
 compose-hilt-navigation = "1.2.0"
 compose-coil = "2.5.0"
 compose-lottie = "6.1.0"
@@ -20,16 +20,16 @@ room = "2.6.1"
 datastore-preferences = "1.1.1"
 
 # Google
-ksp = "1.9.20-1.0.14"
-review-ktx = "2.0.1"
+ksp = "1.9.24-1.0.20"
+review-ktx = "2.0.2"
 
 # Java
 java-inject = "1"
 
 # Kotlin
-kotlin = "1.9.20"
+kotlin = "1.9.24"
 coroutine = "1.7.3"
-serialization = "1.6.1"
+serialization = "1.6.3"
 
 # Retrofit
 retrofit = "2.9.0"
@@ -38,11 +38,12 @@ okhttp = "5.0.0-alpha.11"
 # Util
 moshi-kotlin = "1.15.0"
 glide = "4.13.0"
-core-ktx = "1.13.1"
+core-ktx = "1.15.0"
 junit = "4.13.2"
-junit-version = "1.1.5"
-espresso-core = "3.5.1"
-appcompat = "1.6.1"
+junit-version = "1.2.1"
+espresso-core = "3.6.1"
+appcompat = "1.7.0"
+material = "1.12.0"
 
 [libraries]
 agp = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
@@ -63,6 +64,7 @@ coil-core = { group = "io.coil-kt", name = "coil", version.ref = "compose-coil" 
 coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "compose-coil" }
 coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "compose-coil" }
 
+accompainst-system-ui = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanist-permission = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "compose-lottie" }
@@ -101,6 +103,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [bundles]
 compose = [
