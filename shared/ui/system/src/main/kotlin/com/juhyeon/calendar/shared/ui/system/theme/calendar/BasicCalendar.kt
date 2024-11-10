@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
+import com.juhyeon.calendar.shared.ui.system.theme.Departure8
 import com.juhyeon.calendar.shared.ui.system.theme.Gray400
 import com.juhyeon.calendar.shared.ui.system.theme.Normal18
 import com.juhyeon.calendar.shared.ui.system.theme.Normal8
@@ -88,7 +89,7 @@ fun CalendarBasic(
                     )
                     Text(
                         text = "1,000",
-                        style = MaterialTheme.typography.Normal8,
+                        style = MaterialTheme.typography.Departure8,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
