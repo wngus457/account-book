@@ -46,12 +46,14 @@ fun HomeScreen(
             }
         }
     }
-    HomeContents()
+    HomeContents(
+        onSelectDate = { postEvent(HomeContract.Event.OnSelectDate(it)) }
+    )
 }
 
 @Composable
 private fun HomeContents(
-
+    onSelectDate: (LocalDate) -> Unit
 ) {
     val localDate = remember { mutableStateOf(LocalDate.now()) }
     val selectedDate = remember { mutableStateOf(LocalDate.now()) }
@@ -72,7 +74,10 @@ private fun HomeContents(
                 firstDayOfWeek = localDate.value.withDayOfMonth(1).dayOfWeek.toCalendarDayOfWeek().ordinal,
                 onPrevMonthClick = { localDate.value = localDate.value.minusMonths(1) },
                 onNextMonthClick = { localDate.value = localDate.value.plusMonths(1) },
-                onSelectedDate = { selectedDate.value = it }
+                onSelectedDate = {
+                    selectedDate.value = it
+                    onSelectDate(it)
+                }
             )
             HorizontalDivider()
 
@@ -169,5 +174,7 @@ private fun HomeContents(
 @Preview
 @Composable
 private fun HomeContentsPreview() {
-    HomeContents()
+    HomeContents(
+        onSelectDate = { }
+    )
 }
