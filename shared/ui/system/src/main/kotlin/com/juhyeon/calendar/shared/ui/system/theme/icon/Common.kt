@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Timer
@@ -16,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 val CommonArrowBack = Icons.AutoMirrored.Filled.KeyboardArrowLeft
 val CommonArrowForward = Icons.AutoMirrored.Filled.KeyboardArrowRight
+val CommonClose = Icons.Filled.Close
+val CommonBack = Icons.Filled.ArrowBackIosNew
 
 val BottomNavSelectedHome = Icons.Filled.Home
 val BottomNavUnSelectedHome = Icons.Outlined.Home

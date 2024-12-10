@@ -1,5 +1,6 @@
 plugins {
     id("android.library.convention")
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -21,4 +22,5 @@ dependencies {
     implementation(libs.bundles.glide)
 
     implementation(libs.lottie.compose)
+    implementation(libs.serialization)
 }

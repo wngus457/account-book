@@ -119,7 +119,7 @@ interface MultipleEventCutterManager {
 }
 
 @Composable
-private fun <T> multipleEventsCutter(
+fun <T> multipleEventsCutter(
     content: @Composable (MultipleEventCutterManager) -> T
 ): T {
     val debounceState = remember {

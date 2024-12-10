@@ -54,8 +54,6 @@ fun RootNavGraph(
             SplashScreen(navController)
         }
 
-        noAnimComposable<NavigationRouteId.Home> {
-            HomeScreen(navController)
-        }
+        homeGraph(navController)
     }
 }
