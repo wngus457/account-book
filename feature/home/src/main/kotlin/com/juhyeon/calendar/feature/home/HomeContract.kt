@@ -8,9 +8,12 @@ import java.time.LocalDate
 interface HomeContract {
     sealed interface Event : UiEvent {
         data class OnSelectDate(val param: LocalDate): Event
+        data object OnAddAccountClick : Event
     }
 
     data object State : UiState
 
-    sealed interface Effect : UiEffect
+    sealed interface Effect : UiEffect {
+        data class NavigateToAddAccount(val year: String, val month: String, val date: String) : Effect
+    }
 }

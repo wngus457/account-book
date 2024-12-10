@@ -68,6 +68,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 dependencies {
                     add("implementation", project(":feature:splash"))
                     add("implementation", project(":feature:home"))
+                    add("implementation", project(":feature:account"))
 
                     add("implementation", project(":shared:core-mvi"))
                     add("implementation", project(":shared:domain"))

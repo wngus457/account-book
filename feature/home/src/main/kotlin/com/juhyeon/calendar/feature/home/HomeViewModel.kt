@@ -1,6 +1,7 @@
 package com.juhyeon.calendar.feature.home
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juhyeon.calendar.shared.core.mvi.MviReducer
@@ -31,12 +32,23 @@ class HomeViewModel @Inject constructor(
     val stateFlow = reducer.stateFlow
     val effectFlow = reducer.effectFlow
 
+    val localDate = mutableStateOf(LocalDate.now())
+    val selectDate = mutableStateOf(LocalDate.now())
+
     private fun initState() = HomeContract.State
 
     private fun handleEvent(event: HomeContract.Event) {
         when (event) {
             is HomeContract.Event.OnSelectDate -> onSelectDate(event.param)
+            is HomeContract.Event.OnAddAccountClick -> dateSeparation(selectDate.value)
         }
+    }
+
+    private fun dateSeparation(localDate: LocalDate) {
+        val year = localDate.year.toString()
+        val month = localDate.month.toString()
+        val date = localDate.dayOfMonth.toString()
+        reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(year = year, month = month, date = date))
     }
 
     private fun onSelectDate(localDate: LocalDate) {
