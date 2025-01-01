@@ -3,6 +3,7 @@ package com.juhyeon.calendar.shared.data.expense
 import com.juhyeon.calendar.shared.domain.expense.Expense
 
 data class ExpenseData(
+    val key: String,
     val year: String,
     val month: String,
     val date: String,
@@ -20,6 +21,7 @@ data class ExpenseData(
 }
 
 internal fun ExpenseData.toDomain() = Expense(
+    key = key,
     year = year,
     month = month,
     date = date,
@@ -37,6 +39,7 @@ private fun ExpenseData.ExpenseItem.toDomain() = Expense.ExpenseItem(
 )
 
 internal fun Expense.toData() = ExpenseData(
+    key = key,
     year = year,
     month = month,
     date = date,

@@ -31,6 +31,7 @@ data class ExpenseEntity(
 }
 
 internal fun ExpenseEntity.toData() = ExpenseData(
+    key = key,
     year = year,
     month = month,
     date = date,

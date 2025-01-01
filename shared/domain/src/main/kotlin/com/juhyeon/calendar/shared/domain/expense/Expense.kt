@@ -1,6 +1,7 @@
 package com.juhyeon.calendar.shared.domain.expense
 
 data class Expense(
+    val key: String,
     val year: String,
     val month: String,
     val date: String,
