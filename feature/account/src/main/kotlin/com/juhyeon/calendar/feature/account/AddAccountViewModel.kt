@@ -1,5 +1,6 @@
 package com.juhyeon.calendar.feature.account
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +28,8 @@ class AddAccountViewModel @Inject constructor(
     private val year = state.toRoute<AddAccount>().year
     private val month = state.toRoute<AddAccount>().month
     private val date = state.toRoute<AddAccount>().date
+
+    val isExpenditure = mutableStateOf(true)
 
     private fun initState() = AddAccountContract.State(
         expense = null

@@ -1,6 +1,5 @@
 package com.juhyeon.calendar.feature.home
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,27 +34,42 @@ class HomeViewModel @Inject constructor(
     val localDate = mutableStateOf(LocalDate.now())
     val selectDate = mutableStateOf(LocalDate.now())
 
-    private fun initState() = HomeContract.State
+    private fun initState() = HomeContract.State(
+        uiState = HomeContract.State.HomeUiState.Loading
+    )
 
     private fun handleEvent(event: HomeContract.Event) {
         when (event) {
+            is HomeContract.Event.OnResume -> refresher()
             is HomeContract.Event.OnSelectDate -> onSelectDate(event.param)
             is HomeContract.Event.OnAddAccountClick -> dateSeparation(selectDate.value)
         }
     }
 
+    private fun refresher() {
+        getMonthExpenseListUseCase(
+            GetMonthExpenseParam(year = selectDate.value.year.toString(), month = selectDate.value.month.value.toString())
+        )
+            .take(1)
+            .onSuccess {
+                reducer.setState { copy(uiState = HomeContract.State.HomeUiState.Success(expenseList = it)) }
+            }
+            .launchIn(viewModelScope)
+    }
+
     private fun dateSeparation(localDate: LocalDate) {
         val year = localDate.year.toString()
-        val month = localDate.month.toString()
+        val month = localDate.month.value.toString()
         val date = localDate.dayOfMonth.toString()
         reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(year = year, month = month, date = date))
     }
 
     private fun onSelectDate(localDate: LocalDate) {
         val param = Expense(
+            key = 0,
             year = localDate.year.toString(),
-            month = localDate.month.toString(),
-            date = localDate.dayOfWeek.value.toString(),
+            month = localDate.month.value.toString(),
+            date = localDate.dayOfMonth.toString(),
             expenseList = listOf(
                 Expense.ExpenseItem(
                     price = 1000,
@@ -71,11 +85,10 @@ class HomeViewModel @Inject constructor(
         insertExpenseUseCase(param)
             .take(1)
             .onSuccess {
-                Log.e("테스트", "테스트")
-                getMonthExpenseListUseCase(GetMonthExpenseParam(year = localDate.year.toString(), month = localDate.month.toString()))
+                getMonthExpenseListUseCase(GetMonthExpenseParam(year = localDate.year.toString(), month = localDate.month.value.toString()))
                     .take(1)
                     .onSuccess {
-                        Log.e("테스트", it.toString())
+                        reducer.setState { copy(uiState = HomeContract.State.HomeUiState.Success(expenseList = it)) }
                     }
                     .launchIn(viewModelScope)
             }

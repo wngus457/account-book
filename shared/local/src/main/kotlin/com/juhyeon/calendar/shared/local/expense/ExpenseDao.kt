@@ -14,5 +14,4 @@ interface ExpenseDao {
 
     @Query("SELECT * FROM `expense` WHERE expense.year = :year AND expense.month = :month")
     fun getMonthExpenseEntity(year: String, month: String): Flow<List<ExpenseEntity>>
-
 }

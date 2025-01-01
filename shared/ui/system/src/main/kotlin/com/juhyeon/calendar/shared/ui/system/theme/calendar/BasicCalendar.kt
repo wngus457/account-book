@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.juhyeon.calendar.shared.domain.expense.Expense
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
 import com.juhyeon.calendar.shared.ui.system.theme.Departure8
 import com.juhyeon.calendar.shared.ui.system.theme.Gray400
@@ -41,6 +42,7 @@ import java.time.LocalDate
 
 @Composable
 fun CalendarBasic(
+    expenseList: List<Expense>,
     baseDate: LocalDate,
     selectedDate: LocalDate,
     firstDayOfWeek: Int,
@@ -88,7 +90,9 @@ fun CalendarBasic(
                         onSelectedDate = { onSelectedDate(it) }
                     )
                     Text(
-                        text = "1,000",
+                        text = expenseList.find { it.date == (day + 1).toString() }?.let {
+                            (it.totalEarning - it.totalExpense).toString()
+                        } ?: "",
                         style = MaterialTheme.typography.Departure8,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -202,6 +206,7 @@ private fun CalendarViewPreview() {
     val selectedDate = remember { mutableStateOf(LocalDate.now()) }
 
     CalendarBasic(
+        expenseList = listOf(),
         baseDate = localDate.value,
         selectedDate = selectedDate.value,
         firstDayOfWeek = localDate.value.withDayOfMonth(1).dayOfWeek.toCalendarDayOfWeek().ordinal,
