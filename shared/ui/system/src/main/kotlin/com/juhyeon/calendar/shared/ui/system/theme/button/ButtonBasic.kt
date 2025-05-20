@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,7 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.ui.common.extension.multipleEventsCutter
-import com.juhyeon.calendar.shared.ui.system.theme.Normal14
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Radius8
+import com.juhyeon.calendar.shared.ui.system.theme.theme.normal
 
 @Composable
 fun ButtonBasic(
@@ -58,7 +58,7 @@ fun ButtonBasic(
             contentPadding = PaddingValues(contentPadding),
             enabled = state != ButtonState.Disabled,
             colors = colorSet.buttonColors(),
-            shape = RoundedCornerShape(8.dp),
+            shape = Radius8,
             border = BorderStroke(1.dp, colorSet.borderColor),
             onClick = { cutter.processEvent(onClick) }
         ) {
@@ -77,7 +77,7 @@ private fun ButtonBasicPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
         ButtonBasic(
             text = "테스트",
-            textStyle = MaterialTheme.typography.Normal14,
+            textStyle = MaterialTheme.typography.normal(14),
             onClick = { }
         )
     }

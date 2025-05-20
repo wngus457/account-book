@@ -12,7 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.juhyeon.calendar.shared.ui.system.theme.Gray800
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray800
 
 @Composable
 fun DashedLine(

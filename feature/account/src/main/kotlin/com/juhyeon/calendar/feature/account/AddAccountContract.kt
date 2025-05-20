@@ -9,6 +9,7 @@ interface AddAccountContract {
 
     sealed interface Event : UiEvent {
         data object OnBackClick : Event
+        data class OnKeyClick(val key: String) : Event
     }
 
     data class State(

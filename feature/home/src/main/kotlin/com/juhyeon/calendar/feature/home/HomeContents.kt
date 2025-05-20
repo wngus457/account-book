@@ -16,8 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.domain.expense.Expense
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
-import com.juhyeon.calendar.shared.ui.system.theme.Departure14
-import com.juhyeon.calendar.shared.ui.system.theme.Gray800
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray800
+import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
 import com.juhyeon.calendar.shared.util.kotlin.extension.applyCommaFormat
 
 @Composable
@@ -37,12 +37,12 @@ internal fun ReceiptItem(
         ) {
             Text(
                 text = expenseItem.category,
-                style = MaterialTheme.typography.Departure14,
+                style = MaterialTheme.typography.departureNormal(14),
                 color = Gray800
             )
             Text(
                 text = expenseItem.memo,
-                style = MaterialTheme.typography.Departure14,
+                style = MaterialTheme.typography.departureNormal(14),
                 color = Gray800
             )
         }
@@ -52,7 +52,7 @@ internal fun ReceiptItem(
             maxLines = 1,
             textAlign = TextAlign.End,
             overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.Departure14,
+            style = MaterialTheme.typography.departureNormal(14),
             color = Gray800
         )
     }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,14 +28,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.domain.expense.Expense
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
-import com.juhyeon.calendar.shared.ui.system.theme.Departure8
-import com.juhyeon.calendar.shared.ui.system.theme.Gray400
-import com.juhyeon.calendar.shared.ui.system.theme.Normal18
-import com.juhyeon.calendar.shared.ui.system.theme.Normal8
-import com.juhyeon.calendar.shared.ui.system.theme.SemiBold18
-import com.juhyeon.calendar.shared.ui.system.theme.White100
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowBack
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowForward
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray400
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Radius10
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
+import com.juhyeon.calendar.shared.ui.system.theme.theme.normal
+import com.juhyeon.calendar.shared.ui.system.theme.theme.semiBold
 import java.time.LocalDate
 
 @Composable
@@ -93,7 +91,7 @@ fun CalendarBasic(
                         text = expenseList.find { it.date == (day + 1).toString() }?.let {
                             (it.totalEarning - it.totalExpense).toString()
                         } ?: "",
-                        style = MaterialTheme.typography.Departure8,
+                        style = MaterialTheme.typography.departureNormal(8),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -121,7 +119,7 @@ private fun CalendarDay(
         modifier = modifier
             .wrapContentSize()
             .size(40.dp)
-            .clip(shape = RoundedCornerShape(10.dp))
+            .clip(shape = Radius10)
             .then(background)
             .clickableSingle { onSelectedDate(date) },
         contentAlignment = Alignment.Center
@@ -130,7 +128,7 @@ private fun CalendarDay(
         Text(
             textAlign = TextAlign.Center,
             text = date.dayOfMonth.toString(),
-            style = MaterialTheme.typography.Normal18,
+            style = MaterialTheme.typography.normal(18),
             color = currentColor
         )
     }
@@ -152,8 +150,8 @@ private fun MonthHeadComponent(
         Icon(
             modifier = Modifier
                 .size(40.dp)
-                .border(width = 1.dp, color = Gray400, shape = RoundedCornerShape(10.dp))
-                .clip(shape = RoundedCornerShape(10.dp))
+                .border(width = 1.dp, color = Gray400, shape = Radius10)
+                .clip(shape = Radius10)
                 .background(White100)
                 .clickableSingle { onPrevMonthClick() }
                 .padding(8.dp),
@@ -163,13 +161,13 @@ private fun MonthHeadComponent(
         Text(
             text = monthHeadText,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.SemiBold18
+            style = MaterialTheme.typography.semiBold(18)
         )
         Icon(
             modifier = Modifier
                 .size(40.dp)
-                .border(width = 1.dp, color = Gray400, shape = RoundedCornerShape(10.dp))
-                .clip(shape = RoundedCornerShape(10.dp))
+                .border(width = 1.dp, color = Gray400, shape = Radius10)
+                .clip(shape = Radius10)
                 .background(White100)
                 .clickableSingle { onNextMonthClick() }
                 .padding(8.dp),
@@ -190,7 +188,7 @@ private fun DayOfWeekStandardComponent(
                     .fillMaxWidth()
                     .weight(1f),
                 text = dayOfWeek.title,
-                style = MaterialTheme.typography.Normal18,
+                style = MaterialTheme.typography.normal(18),
                 color = dayOfWeek.color,
                 textAlign = TextAlign.Center
             )
