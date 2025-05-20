@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 import com.juhyeon.calendar.ui.theme.CalendarTheme
 import dagger.hilt.android.AndroidEntryPoint
 

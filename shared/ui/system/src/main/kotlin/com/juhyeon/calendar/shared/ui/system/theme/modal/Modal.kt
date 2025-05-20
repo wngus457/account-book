@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,11 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
-import com.juhyeon.calendar.shared.ui.system.theme.Black900
-import com.juhyeon.calendar.shared.ui.system.theme.Gray200
-import com.juhyeon.calendar.shared.ui.system.theme.Medium16
-import com.juhyeon.calendar.shared.ui.system.theme.SemiBold18
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Black900
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray200
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Radius8
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.medium
+import com.juhyeon.calendar.shared.ui.system.theme.theme.semiBold
 
 @Composable
 fun Modal(
@@ -65,7 +65,7 @@ fun Modal(
                         }
                     }
                 },
-                shape = RoundedCornerShape(8.dp)
+                shape = Radius8
             )
         }
     }
@@ -110,7 +110,7 @@ private fun BasicModalTitle(title: String) {
         modifier = Modifier.fillMaxWidth(),
         text = title,
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.SemiBold18,
+        style = MaterialTheme.typography.semiBold(18),
         color = Black900
     )
 }
@@ -131,7 +131,7 @@ private fun RowScope.BasicModalButton(
         Text(
             text = text,
             color = textColor,
-            style = MaterialTheme.typography.Medium16
+            style = MaterialTheme.typography.medium(16)
         )
     }
 }

@@ -3,11 +3,11 @@ package com.juhyeon.calendar.shared.ui.system.theme.button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.juhyeon.calendar.shared.ui.system.theme.Gray300
-import com.juhyeon.calendar.shared.ui.system.theme.Gray400
-import com.juhyeon.calendar.shared.ui.system.theme.Gray800
-import com.juhyeon.calendar.shared.ui.system.theme.Red300
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray300
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray400
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray800
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Red300
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 
 sealed interface ButtonColor {
     val backgroundColor: Color

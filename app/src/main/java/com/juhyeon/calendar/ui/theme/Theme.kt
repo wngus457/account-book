@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.luminance
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.juhyeon.calendar.shared.ui.system.theme.Black900
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Black900
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple40,

@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
 
     private fun onSelectDate(localDate: LocalDate) {
         val param = Expense(
-            key = 0,
+            key = "",
             year = localDate.year.toString(),
             month = localDate.month.value.toString(),
             date = localDate.dayOfMonth.toString(),

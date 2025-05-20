@@ -1,4 +1,4 @@
-package com.juhyeon.calendar.shared.ui.system.theme
+package com.juhyeon.calendar.shared.ui.system.theme.theme
 
 import androidx.compose.ui.graphics.Color
 

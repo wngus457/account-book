@@ -1,9 +1,9 @@
 package com.juhyeon.calendar.shared.ui.system.theme.calendar
 
 import androidx.compose.ui.graphics.Color
-import com.juhyeon.calendar.shared.ui.system.theme.Black900
-import com.juhyeon.calendar.shared.ui.system.theme.Blue600
-import com.juhyeon.calendar.shared.ui.system.theme.Red500
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Black900
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Blue600
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Red500
 import java.time.DayOfWeek
 
 enum class CalendarDayOfWeek(val title: String, val color: Color) {

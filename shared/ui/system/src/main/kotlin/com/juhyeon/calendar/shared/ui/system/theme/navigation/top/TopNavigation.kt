@@ -19,9 +19,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
-import com.juhyeon.calendar.shared.ui.system.theme.Bold16
-import com.juhyeon.calendar.shared.ui.system.theme.White100
-import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowBack
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.bold
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonBack
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonClose
 
@@ -51,7 +50,7 @@ fun BasicTopNavigation(
                         text = title.title,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = MaterialTheme.typography.Bold16
+                        style = MaterialTheme.typography.bold(16)
                     )
                 }
             }

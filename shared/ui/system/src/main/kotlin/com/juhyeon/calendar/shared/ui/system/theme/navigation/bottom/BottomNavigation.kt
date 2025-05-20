@@ -16,10 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.juhyeon.calendar.shared.ui.system.theme.Black900
-import com.juhyeon.calendar.shared.ui.system.theme.Gray300
-import com.juhyeon.calendar.shared.ui.system.theme.Normal14
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Black900
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray300
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.normal
 
 @Composable
 fun <T : BottomNavItem> BottomNavigation(
@@ -53,7 +53,7 @@ fun <T : BottomNavItem> BottomNavigation(
                     Text(
                         text = item.name,
                         color = if (currentDestination?.route == item.routeId::class.qualifiedName) Black900 else Gray300,
-                        style = MaterialTheme.typography.Normal14
+                        style = MaterialTheme.typography.normal(14)
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(

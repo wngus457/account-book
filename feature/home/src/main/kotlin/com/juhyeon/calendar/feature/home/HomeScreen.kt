@@ -28,12 +28,11 @@ import com.juhyeon.calendar.shared.domain.expense.Expense
 import com.juhyeon.calendar.shared.navigation.AddAccount
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
 import com.juhyeon.calendar.shared.ui.common.util.OnLifecycleEvent
-import com.juhyeon.calendar.shared.ui.system.theme.Departure16
-import com.juhyeon.calendar.shared.ui.system.theme.Departure18
-import com.juhyeon.calendar.shared.ui.system.theme.White100
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.CalendarBasic
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.toCalendarDayOfWeek
 import com.juhyeon.calendar.shared.ui.system.theme.canvas.DashedLine
+import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
 import java.time.LocalDate
 
 @Composable
@@ -108,7 +107,7 @@ private fun HomeContents(
                         .clickableSingleIgnoreInteraction { onAddAccountClick() },
                     textAlign = TextAlign.Center,
                     text = "+ 등록",
-                    style = MaterialTheme.typography.Departure16
+                    style = MaterialTheme.typography.departureNormal(16)
                 )
                 LazyColumn(
                     modifier = Modifier.weight(1f)
@@ -133,12 +132,12 @@ private fun HomeContents(
                             ) {
                                 Text(
                                     text = "수입",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
 
                                 Text(
                                     text = "+1,000",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
                             }
                             Row(
@@ -148,12 +147,12 @@ private fun HomeContents(
                             ) {
                                 Text(
                                     text = "지출",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
 
                                 Text(
                                     text = "-1,000",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
                             }
                             Row(
@@ -163,12 +162,12 @@ private fun HomeContents(
                             ) {
                                 Text(
                                     text = "합계",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
 
                                 Text(
                                     text = "+1,000",
-                                    style = MaterialTheme.typography.Departure16
+                                    style = MaterialTheme.typography.departureNormal(16)
                                 )
                             }
                         }
@@ -187,12 +186,12 @@ private fun HomeContents(
                     ) {
                         Text(
                             text = "이번달 총 잔액",
-                            style = MaterialTheme.typography.Departure18
+                            style = MaterialTheme.typography.departureNormal(18)
                         )
 
                         Text(
                             text = "+1,000",
-                            style = MaterialTheme.typography.Departure18
+                            style = MaterialTheme.typography.departureNormal(18)
                         )
                     }
                 }
@@ -209,7 +208,7 @@ private fun HomeContentsPreview() {
             uiState = HomeContract.State.HomeUiState.Success(
                 expenseList = listOf(
                     Expense(
-                        key = 0,
+                        key = "0",
                         year = "2025",
                         month = "1",
                         date = "1",

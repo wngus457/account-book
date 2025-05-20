@@ -30,6 +30,7 @@ class AddAccountViewModel @Inject constructor(
     private val date = state.toRoute<AddAccount>().date
 
     val isExpenditure = mutableStateOf(true)
+    val price = mutableStateOf("0")
 
     private fun initState() = AddAccountContract.State(
         expense = null
@@ -38,11 +39,21 @@ class AddAccountViewModel @Inject constructor(
     private fun handleEvent(event: AddAccountContract.Event) {
         when (event) {
             is AddAccountContract.Event.OnBackClick -> reducer.setEffect(AddAccountContract.Effect.NavigateToBack)
+            is AddAccountContract.Event.OnKeyClick -> changePrice(event.key)
         }
     }
 
-    init {
-
+    private fun changePrice(key: String) {
+        when(key) {
+            "<-" -> {
+                if (price.value.isEmpty()) {
+                    price.value = "0"
+                } else {
+                    price.value = price.value.substring(0, price.value.length - 1)
+                }
+            }
+            else -> price.value += key
+        }
     }
 
 }
