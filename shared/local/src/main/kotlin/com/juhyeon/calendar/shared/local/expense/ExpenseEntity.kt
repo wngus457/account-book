@@ -2,33 +2,34 @@ package com.juhyeon.calendar.shared.local.expense
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import com.juhyeon.calendar.shared.data.expense.ExpenseData
-import kotlinx.serialization.Serializable
+import com.juhyeon.calendar.shared.local.category.CategoryEntity
 
-@Entity(tableName = "expense")
-@TypeConverters(ExpenseLocalTypeConverters::class)
+@Entity(
+    tableName = "expense",
+    foreignKeys = [
+        ForeignKey(
+            entity = CategoryEntity::class,
+            parentColumns = ["categoryKey"],
+            childColumns = ["categoryNumber"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class ExpenseEntity(
-    @PrimaryKey
-    val key: String = "",
+    @PrimaryKey(autoGenerate = true)
+    val key: Long,
     @ColumnInfo(defaultValue = "")
-    val year: String,
+    val time: String,
     @ColumnInfo(defaultValue = "")
-    val month: String,
-    @ColumnInfo(defaultValue = "")
-    val date: String,
-    val expenseList: List<ExpenseItem>
-) {
-    @Serializable
-    data class ExpenseItem(
-        val price: Long,
-        val time: String,
-        val category: String,
-        val memo: String,
-        val isExpenditure: Boolean
-    )
-}
+    val memo: String,
+    val money: Long,
+    @ColumnInfo(name = "categoryNumber")
+    val categoryNumber: Int,
+    val isPositive: Boolean
+)
 
 internal fun ExpenseEntity.toData() = ExpenseData(
     key = key,

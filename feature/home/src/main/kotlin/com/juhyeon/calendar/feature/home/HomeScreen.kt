@@ -18,21 +18,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavHostController
-import com.juhyeon.calendar.shared.domain.expense.Expense
+import com.juhyeon.calendar.domain.expense.Expense
 import com.juhyeon.calendar.shared.navigation.AddAccount
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
 import com.juhyeon.calendar.shared.ui.common.util.OnLifecycleEvent
-import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.CalendarBasic
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.toCalendarDayOfWeek
 import com.juhyeon.calendar.shared.ui.system.theme.canvas.DashedLine
+import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
+import com.juhyeon.calendar.shared.util.kotlin.extension.applyCommaFormat
 import java.time.LocalDate
 
 @Composable
@@ -119,6 +121,15 @@ private fun HomeContents(
                         DashedLine(modifier = Modifier.padding(vertical = 6.dp))
                     }
                     item {
+                        val selectedExpense = state.uiState.expenseList.find {
+                            it.year == selectDate.year.toString() &&
+                            it.month == selectDate.month.value.toString() &&
+                            it.date == selectDate.dayOfMonth.toString()
+                        }
+                        val dayEarning = selectedExpense?.totalEarning ?: 0L
+                        val dayExpense = selectedExpense?.totalExpense ?: 0L
+                        val dayBalance = dayEarning - dayExpense
+
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -136,8 +147,9 @@ private fun HomeContents(
                                 )
 
                                 Text(
-                                    text = "+1,000",
-                                    style = MaterialTheme.typography.departureNormal(16)
+                                    text = "+${dayEarning.applyCommaFormat()}",
+                                    style = MaterialTheme.typography.departureNormal(16),
+                                    color = Color.Blue
                                 )
                             }
                             Row(
@@ -151,8 +163,9 @@ private fun HomeContents(
                                 )
 
                                 Text(
-                                    text = "-1,000",
-                                    style = MaterialTheme.typography.departureNormal(16)
+                                    text = "-${dayExpense.applyCommaFormat()}",
+                                    style = MaterialTheme.typography.departureNormal(16),
+                                    color = Color.Red
                                 )
                             }
                             Row(
@@ -166,14 +179,16 @@ private fun HomeContents(
                                 )
 
                                 Text(
-                                    text = "+1,000",
-                                    style = MaterialTheme.typography.departureNormal(16)
+                                    text = "${if (dayBalance >= 0) "+" else ""}${dayBalance.applyCommaFormat()}",
+                                    style = MaterialTheme.typography.departureNormal(16),
+                                    color = if (dayBalance >= 0) Color.Blue else Color.Red
                                 )
                             }
                         }
                     }
                 }
                 Column {
+                    val monthlyBalance = state.uiState.monthlyTotalEarning - state.uiState.monthlyTotalExpense
                     DashedLine(
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
@@ -190,8 +205,9 @@ private fun HomeContents(
                         )
 
                         Text(
-                            text = "+1,000",
-                            style = MaterialTheme.typography.departureNormal(18)
+                            text = "${if (monthlyBalance >= 0) "+" else ""}${monthlyBalance.applyCommaFormat()}",
+                            style = MaterialTheme.typography.departureNormal(18),
+                            color = if (monthlyBalance >= 0) Color.Blue else Color.Red
                         )
                     }
                 }
@@ -224,7 +240,9 @@ private fun HomeContentsPreview() {
                         totalExpense = 1000L,
                         totalEarning = 0L
                     )
-                )
+                ),
+                monthlyTotalEarning = 0L,
+                monthlyTotalExpense = 1000L
             )
         ),
         localDate = LocalDate.now(),
