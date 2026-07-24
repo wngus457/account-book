@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.juhyeon.calendar.shared.domain.expense.Expense
+import com.juhyeon.calendar.domain.expense.Expense
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray800
 import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal

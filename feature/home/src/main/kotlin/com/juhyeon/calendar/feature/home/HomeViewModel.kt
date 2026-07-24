@@ -3,12 +3,10 @@ package com.juhyeon.calendar.feature.home
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.juhyeon.calendar.domain.expense.month.GetMonthExpenseListUseCase
+import com.juhyeon.calendar.domain.expense.month.GetMonthExpenseParam
+import com.juhyeon.calendar.domain.onSuccess
 import com.juhyeon.calendar.shared.core.mvi.MviReducer
-import com.juhyeon.calendar.shared.domain.expense.Expense
-import com.juhyeon.calendar.shared.domain.expense.insert.InsertExpenseUseCase
-import com.juhyeon.calendar.shared.domain.expense.month.GetMonthExpenseListUseCase
-import com.juhyeon.calendar.shared.domain.expense.month.GetMonthExpenseParam
-import com.juhyeon.calendar.shared.domain.onSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.take
@@ -17,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val insertExpenseUseCase: InsertExpenseUseCase,
     private val getMonthExpenseListUseCase: GetMonthExpenseListUseCase
 ) : ViewModel() {
 
@@ -48,11 +45,25 @@ class HomeViewModel @Inject constructor(
 
     private fun refresher() {
         getMonthExpenseListUseCase(
-            GetMonthExpenseParam(year = selectDate.value.year.toString(), month = selectDate.value.month.value.toString())
+            GetMonthExpenseParam(
+                year = localDate.value.year.toString(),
+                month = localDate.value.month.value.toString()
+            )
         )
             .take(1)
-            .onSuccess {
-                reducer.setState { copy(uiState = HomeContract.State.HomeUiState.Success(expenseList = it)) }
+            .onSuccess { expenseList ->
+                val monthlyTotalEarning = expenseList.sumOf { it.totalEarning }
+                val monthlyTotalExpense = expenseList.sumOf { it.totalExpense }
+
+                reducer.setState {
+                    copy(
+                        uiState = HomeContract.State.HomeUiState.Success(
+                            expenseList = expenseList,
+                            monthlyTotalEarning = monthlyTotalEarning,
+                            monthlyTotalExpense = monthlyTotalExpense
+                        )
+                    )
+                }
             }
             .launchIn(viewModelScope)
     }
@@ -64,34 +75,11 @@ class HomeViewModel @Inject constructor(
         reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(year = year, month = month, date = date))
     }
 
-    private fun onSelectDate(localDate: LocalDate) {
-        val param = Expense(
-            key = "",
-            year = localDate.year.toString(),
-            month = localDate.month.value.toString(),
-            date = localDate.dayOfMonth.toString(),
-            expenseList = listOf(
-                Expense.ExpenseItem(
-                    price = 1000,
-                    time = "",
-                    category = "카테고리",
-                    memo = "테스트",
-                    isExpenditure = true
-                )
-            ),
-            totalEarning = 1000,
-            totalExpense = 0
-        )
-        insertExpenseUseCase(param)
-            .take(1)
-            .onSuccess {
-                getMonthExpenseListUseCase(GetMonthExpenseParam(year = localDate.year.toString(), month = localDate.month.value.toString()))
-                    .take(1)
-                    .onSuccess {
-                        reducer.setState { copy(uiState = HomeContract.State.HomeUiState.Success(expenseList = it)) }
-                    }
-                    .launchIn(viewModelScope)
-            }
-            .launchIn(viewModelScope)
+    private fun onSelectDate(date: LocalDate) {
+        selectDate.value = date
+        if (date.month != localDate.value.month || date.year != localDate.value.year) {
+            localDate.value = date
+            refresher()
+        }
     }
 }

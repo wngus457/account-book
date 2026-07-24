@@ -63,7 +63,7 @@ class SharedLibraryConventionPlugin : Plugin<Project> {
                 }
 
                 dependencies {
-                    add("implementation", project(":shared:domain"))
+                    add("implementation", project(":domain"))
                     add("implementation", project(":shared:util:kotlin"))
 
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))

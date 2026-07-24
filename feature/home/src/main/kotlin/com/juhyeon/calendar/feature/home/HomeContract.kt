@@ -1,9 +1,9 @@
 package com.juhyeon.calendar.feature.home
 
+import com.juhyeon.calendar.domain.expense.Expense
 import com.juhyeon.calendar.shared.core.mvi.UiEffect
 import com.juhyeon.calendar.shared.core.mvi.UiEvent
 import com.juhyeon.calendar.shared.core.mvi.UiState
-import com.juhyeon.calendar.shared.domain.expense.Expense
 import java.time.LocalDate
 
 interface HomeContract {
@@ -19,7 +19,9 @@ interface HomeContract {
         sealed interface HomeUiState {
             data object Loading : HomeUiState
             data class Success(
-                val expenseList: List<Expense>
+                val expenseList: List<Expense>,
+                val monthlyTotalEarning: Long = 0L,
+                val monthlyTotalExpense: Long = 0L
             ) : HomeUiState
         }
     }

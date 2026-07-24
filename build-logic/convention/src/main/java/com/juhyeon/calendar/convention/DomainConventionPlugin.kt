@@ -18,13 +18,14 @@ class DomainConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.jvm")
             }
 
+            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
             extensions.configure<KotlinProjectExtension> {
                 java {
                     sourceCompatibility = JavaVersion.VERSION_17
                     targetCompatibility = JavaVersion.VERSION_17
                 }
 
-                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
                 dependencies {
                     add("implementation", libs.findLibrary("coroutine-core").get())
                 }

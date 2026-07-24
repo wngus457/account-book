@@ -65,7 +65,7 @@ class FeatureConventionPlugin : Plugin<Project> {
 
                 dependencies {
                     add("implementation", project(":shared:core-mvi"))
-                    add("implementation", project(":shared:domain"))
+                    add("implementation", project(":domain"))
                     add("implementation", project(":shared:ui:common"))
                     add("implementation", project(":shared:ui:system"))
                     add("implementation", project(":shared:util:android"))

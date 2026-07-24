@@ -71,14 +71,17 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", project(":feature:account"))
 
                     add("implementation", project(":shared:core-mvi"))
-                    add("implementation", project(":shared:domain"))
-                    add("implementation", project(":shared:data"))
-                    add("implementation", project(":shared:local"))
                     add("implementation", project(":shared:navigation"))
                     add("implementation", project(":shared:ui:common"))
                     add("implementation", project(":shared:ui:system"))
                     add("implementation", project(":shared:util:android"))
                     add("implementation", project(":shared:util:kotlin"))
+
+                    add("implementation", project(":domain"))
+                    add("implementation", project(":data:remote"))
+                    add("implementation", project(":data:local"))
+                    add("implementation", project(":data:repository"))
+
 
                     add("implementation", platform(libs.findLibrary("compose-bom").get()))
                     add("implementation", libs.findBundle("compose").get())
