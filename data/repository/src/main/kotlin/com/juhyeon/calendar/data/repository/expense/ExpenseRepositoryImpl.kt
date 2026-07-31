@@ -13,9 +13,8 @@ class ExpenseRepositoryImpl @Inject constructor(
     private val expenseLocalDataSource: ExpenseLocalDataSource
 ) : ExpenseRepository {
 
-    override suspend fun insertExpense(expense: Expense) {
+    override suspend fun insertExpense(expense: Expense) =
         expenseLocalDataSource.insertExpense(expense.toData())
-    }
 
     override fun getMonthExpenseEntity(param: GetMonthExpenseParam): Flow<Result<List<Expense>>> =
         expenseLocalDataSource.getMonthExpenseEntity(param.year, param.month)

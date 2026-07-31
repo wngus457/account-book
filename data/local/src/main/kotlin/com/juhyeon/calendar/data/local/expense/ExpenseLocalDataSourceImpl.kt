@@ -5,28 +5,27 @@ import com.juhyeon.calendar.data.repository.expense.ExpenseLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import kotlin.collections.component1
-import kotlin.collections.component2
 
 class ExpenseLocalDataSourceImpl @Inject constructor(
     private val expenseDao: ExpenseDao
 ) : ExpenseLocalDataSource {
 
-    override suspend fun insertExpense(data: ExpenseData) {
-        data.expenseList.forEach { item ->
-            val entity = ExpenseEntity(
-                year = data.year,
-                month = data.month,
-                date = data.date,
-                time = item.time,
-                memo = item.memo,
-                money = item.price,
-                categoryNumber = item.category.toIntOrNull() ?: 0,
-                isPositive = !item.isExpenditure
-            )
-            expenseDao.insertExpense(entity)
-        }
-    }
+    override suspend fun insertExpense(data: ExpenseData) =
+        expenseDao.insertExpense(data.toEntity())
+//    val value = data.expenseList.firstOrNull()
+//    value?.let { item ->
+//        val entity = ExpenseEntity(
+//            year = data.year,
+//            month = data.month,
+//            date = data.date,
+//            time = item.time,
+//            memo = item.memo,
+//            money = item.price,
+//            categoryNumber = item.category.toIntOrNull() ?: 0,
+//            isPositive = !item.isExpenditure
+//        )
+//        expenseDao.insertExpense(entity)
+//    }
 
     override fun getMonthExpenseEntity(year: String, month: String): Flow<List<ExpenseData>> =
         expenseDao.getMonthExpenseEntity(year = year, month = month)
@@ -38,7 +37,8 @@ class ExpenseLocalDataSourceImpl @Inject constructor(
                         ExpenseData.ExpenseItem(
                             price = entity.money,
                             time = entity.time,
-                            category = entity.categoryNumber.toString(),
+                            //category = entity.categoryNumber.toString(),
+                            category = "",
                             memo = entity.memo,
                             isExpenditure = !entity.isPositive
                         )
