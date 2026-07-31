@@ -14,8 +14,8 @@ class InsertExpenseUseCase @Inject constructor(
     private val expenseRepository: ExpenseRepository,
     @param:DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) : FlowUseCase<Expense, Unit>(dispatcher) {
+
     override fun execute(parameters: Expense): Flow<Result<Unit>> = flow {
-        expenseRepository.insertExpense(parameters)
-        emit(Result.Success(Unit))
+        emit(Result.Success(expenseRepository.insertExpense(parameters)))
     }
 }
