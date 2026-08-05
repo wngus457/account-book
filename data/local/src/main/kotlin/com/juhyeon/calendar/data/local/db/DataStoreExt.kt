@@ -1,4 +1,4 @@
-package com.juhyeon.calendar.shared.local
+package com.juhyeon.calendar.data.local.db
 
 import android.content.Context
 import androidx.datastore.core.DataStore

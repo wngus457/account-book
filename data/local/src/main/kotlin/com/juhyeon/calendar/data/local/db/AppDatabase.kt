@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.juhyeon.calendar.data.local.category.CategoryDao
 import com.juhyeon.calendar.data.local.category.CategoryEntity
 import com.juhyeon.calendar.data.local.expense.ExpenseDao
 import com.juhyeon.calendar.data.local.expense.ExpenseEntity
@@ -19,6 +20,8 @@ import com.juhyeon.calendar.data.local.expense.ExpenseEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun expenseDao(): ExpenseDao
+
+    abstract fun categoryDao(): CategoryDao
 
     companion object {
         private const val ROOM_DATABASE_NAME = "account-book-room"
