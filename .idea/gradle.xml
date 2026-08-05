@@ -25,15 +25,17 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/local" />
+            <option value="$PROJECT_DIR$/data/remote" />
+            <option value="$PROJECT_DIR$/data/repository" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/account" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/splash" />
             <option value="$PROJECT_DIR$/shared" />
             <option value="$PROJECT_DIR$/shared/core-mvi" />
-            <option value="$PROJECT_DIR$/shared/data" />
-            <option value="$PROJECT_DIR$/shared/domain" />
-            <option value="$PROJECT_DIR$/shared/local" />
             <option value="$PROJECT_DIR$/shared/navigation" />
             <option value="$PROJECT_DIR$/shared/ui" />
             <option value="$PROJECT_DIR$/shared/ui/common" />
@@ -43,7 +45,6 @@
             <option value="$PROJECT_DIR$/shared/util/kotlin" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
