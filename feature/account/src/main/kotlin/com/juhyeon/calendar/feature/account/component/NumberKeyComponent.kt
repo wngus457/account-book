@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
+import com.juhyeon.calendar.shared.ui.common.util.preview.VerticalPreviews
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray400
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Radius10
 import com.juhyeon.calendar.shared.ui.system.theme.theme.medium
@@ -70,4 +70,10 @@ private fun NumberKeyComponentPreview() {
     NumberKeyComponent(
         onKeyClick = { }
     )
+}
+
+@VerticalPreviews
+@Composable
+private fun NumberKeyComponentPreviewVertical() {
+    NumberKeyComponent {  }
 }

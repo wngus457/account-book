@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.android) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.serialization) apply false
+    alias(libs.plugins.kotlin.compose) apply false
     id("android.app.convention") apply false
     id("android.feature.convention") apply false
     id("android.kotlin.convention") apply false

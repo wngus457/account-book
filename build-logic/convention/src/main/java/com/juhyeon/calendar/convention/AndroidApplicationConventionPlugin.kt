@@ -2,6 +2,7 @@ package com.juhyeon.calendar.convention
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.juhyeon.calendar.convention.config.AppConfig
+import com.juhyeon.calendar.convention.config.composeCompiler
 import com.juhyeon.calendar.convention.config.configureCommonExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,6 +20,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("dagger.hilt.android.plugin")
                 apply("com.google.devtools.ksp")
                 apply("org.jetbrains.kotlin.plugin.serialization")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
 
             extensions.configure<ApplicationExtension> {
@@ -28,7 +30,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     applicationId = "com.juhyeon.calendar"
                     versionCode = AppConfig.versionCode
                     versionName = AppConfig.versionName
-                    targetSdk = 34
+                    targetSdk = 35
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                     vectorDrawables.useSupportLibrary = true
                 }
@@ -59,11 +61,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     buildConfig = true
                 }
 
-                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-                composeOptions {
-                    kotlinCompilerExtensionVersion = libs.findVersion("compose-compiler").get().requiredVersion
+                composeCompiler {
+                    includeSourceInformation.set(true)
                 }
+
+                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
                 dependencies {
                     add("implementation", project(":feature:splash"))
@@ -101,6 +103,9 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", libs.findLibrary("datastore-preferences").get())
 
                     add("implementation", libs.findLibrary("serialization").get())
+
+                    add("implementation", libs.findLibrary("juhyeon-androidds-extension").get())
+                    add("implementation", libs.findLibrary("juhyeon-androidds-ui").get())
                 }
             }
         }

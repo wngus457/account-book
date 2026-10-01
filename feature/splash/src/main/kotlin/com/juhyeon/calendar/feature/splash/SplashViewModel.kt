@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.juhyeon.calendar.domain.category.Category
-import com.juhyeon.calendar.domain.category.InsertCategoryUseCase
+import com.juhyeon.calendar.domain.category.insert.InsertCategoriesUseCase
 import com.juhyeon.calendar.domain.onSuccess
 import com.juhyeon.calendar.domain.setting.app.GetFirstAppStartUseCase
 import com.juhyeon.calendar.domain.setting.app.SetFirstAppStartUseCase
@@ -19,7 +19,7 @@ import kotlin.time.Duration.Companion.milliseconds
 class SplashViewModel @Inject constructor(
     private val getFirstAppStartUseCase: GetFirstAppStartUseCase,
     private val setFirstAppStartUseCase: SetFirstAppStartUseCase,
-    private val insertCategoryUseCase: InsertCategoryUseCase
+    private val insertCategoriesUseCase: InsertCategoriesUseCase
 ) : ViewModel() {
 
     private val reducer = MviReducer<SplashContract.Event, SplashContract.State, SplashContract.Effect>(
@@ -57,12 +57,22 @@ class SplashViewModel @Inject constructor(
     }
 
     private fun setCategory() {
-        val category = Category(
-            categoryKey = "0",
-            name = "식비"
+        val categories = listOf(
+            Category(
+                categoryKey = "0",
+                name = "식비"
+            ),
+            Category(
+                categoryKey = "0",
+                name = "교통비"
+            ),
+            Category(
+                categoryKey = "0",
+                name = "기타"
+            )
         )
-        insertCategoryUseCase(category)
-            .onSuccess { Log.e("테스트", category.toString()) }
+        insertCategoriesUseCase(categories)
+            .onSuccess { Log.e("테스트", categories.toString()) }
             .launchIn(viewModelScope)
     }
 }
