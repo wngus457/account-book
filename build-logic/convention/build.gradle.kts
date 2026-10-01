@@ -8,6 +8,7 @@ dependencies {
     compileOnly(libs.agp)
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.ksp)
+    compileOnly(libs.compose.compiler.extension)
 }
 
 gradlePlugin {

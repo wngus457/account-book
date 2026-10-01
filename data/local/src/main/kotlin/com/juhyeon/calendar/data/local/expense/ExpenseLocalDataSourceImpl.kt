@@ -11,7 +11,6 @@ class ExpenseLocalDataSourceImpl @Inject constructor(
 ) : ExpenseLocalDataSource {
 
     override suspend fun insertExpense(data: ExpenseData) {
-        //expenseDao.insertExpense(data.toEntity())
         val value = data.expenseList.firstOrNull()
         value?.let { item ->
             val entity = ExpenseEntity(
@@ -39,7 +38,6 @@ class ExpenseLocalDataSourceImpl @Inject constructor(
                             price = entity.money,
                             time = entity.time,
                             category = entity.categoryNumber.toString(),
-                            //category = "",
                             memo = entity.memo,
                             isExpenditure = !entity.isPositive
                         )

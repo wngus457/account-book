@@ -1,8 +1,10 @@
-package com.juhyeon.calendar.domain.category
+package com.juhyeon.calendar.domain.category.get
 
 import com.juhyeon.calendar.domain.FlowNoParamUseCase
 import com.juhyeon.calendar.domain.Result
 import com.juhyeon.calendar.domain.annotaion.DefaultDispatcher
+import com.juhyeon.calendar.domain.category.Category
+import com.juhyeon.calendar.domain.category.CategoryRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged

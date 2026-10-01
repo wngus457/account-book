@@ -1,6 +1,7 @@
 package com.juhyeon.calendar.convention
 
 import com.android.build.api.dsl.LibraryExtension
+import com.juhyeon.calendar.convention.config.composeCompiler
 import com.juhyeon.calendar.convention.config.configureCommonExtension
 import com.juhyeon.calendar.convention.config.debug
 import com.juhyeon.calendar.convention.config.kotlin
@@ -21,6 +22,7 @@ class SharedLibraryConventionPlugin : Plugin<Project> {
                 apply("kotlin-android")
                 apply("com.google.devtools.ksp")
                 apply("kotlin-parcelize")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
             extensions.configure<LibraryExtension> {
                 configureCommonExtension(this)
@@ -56,11 +58,11 @@ class SharedLibraryConventionPlugin : Plugin<Project> {
                     }
                 }
 
-                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-                composeOptions {
-                    kotlinCompilerExtensionVersion = libs.findVersion("compose-compiler").get().requiredVersion
+                composeCompiler {
+                    includeSourceInformation.set(true)
                 }
+
+                val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
                 dependencies {
                     add("implementation", project(":domain"))
