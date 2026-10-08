@@ -1,6 +1,6 @@
 package com.juhyeon.calendar.feature.home
 
-import com.juhyeon.calendar.domain.expense.Expense
+import com.juhyeon.calendar.feature.home.data.HomeUiModel
 import com.juhyeon.calendar.shared.core.mvi.UiEffect
 import com.juhyeon.calendar.shared.core.mvi.UiEvent
 import com.juhyeon.calendar.shared.core.mvi.UiState
@@ -11,6 +11,9 @@ interface HomeContract {
         data object OnResume : Event
         data class OnSelectDate(val param: LocalDate) : Event
         data object OnAddAccountClick : Event
+        data object OnPrevWindow : Event
+        data object OnNextWindow : Event
+        data class OnChangeBaseDay(val day: Int) : Event
     }
 
     data class State(
@@ -19,7 +22,7 @@ interface HomeContract {
         sealed interface HomeUiState {
             data object Loading : HomeUiState
             data class Success(
-                val expenseList: List<Expense>,
+                val expenseList: List<HomeUiModel>,
                 val monthlyTotalEarning: Long = 0L,
                 val monthlyTotalExpense: Long = 0L
             ) : HomeUiState

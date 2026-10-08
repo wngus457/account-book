@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(libs.coroutine.core.jvm)
+    implementation(libs.lifecycle.viewmodel)
 }

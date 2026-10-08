@@ -27,6 +27,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.domain.expense.Expense
+import com.juhyeon.calendar.domain.expense.toLocalDate
+import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowEnd
+import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowBack
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowForward
@@ -37,24 +40,28 @@ import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
 import com.juhyeon.calendar.shared.ui.system.theme.theme.normal
 import com.juhyeon.calendar.shared.ui.system.theme.theme.semiBold
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 @Composable
 fun CalendarBasic(
     expenseList: List<Expense>,
-    baseDate: LocalDate,
+    startDate: LocalDate,
+    endDate: LocalDate,
     selectedDate: LocalDate,
     firstDayOfWeek: Int,
     onPrevMonthClick: () -> Unit,
     onNextMonthClick: () -> Unit,
+    onTitleClick: () -> Unit = { },
     onSelectedDate: (LocalDate) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         MonthHeadComponent(
-            monthHeadText = "${baseDate.year}년 ${baseDate.monthValue}월",
+            monthHeadText = "${startDate.year}년 ${startDate.monthValue}월",
             onPrevMonthClick = { onPrevMonthClick() },
-            onNextMonthClick = { onNextMonthClick() }
+            onNextMonthClick = { onNextMonthClick() },
+            onTitleClick = { onTitleClick() }
         )
         DayOfWeekStandardComponent(
             modifier = Modifier.padding(top = 24.dp)
@@ -71,9 +78,10 @@ fun CalendarBasic(
                     )
                 }
             }
-            items(baseDate.lengthOfMonth()) { day ->
-                val date = baseDate.withDayOfMonth(day + 1)
-                val isSelected = remember(baseDate, selectedDate) {
+            // 기준일에 따라 한 화면이 두 달에 걸칠 수 있어 일수를 구간 길이로 센다.
+            items(ChronoUnit.DAYS.between(startDate, endDate).toInt() + 1) { day ->
+                val date = startDate.plusDays(day.toLong())
+                val isSelected = remember(startDate, selectedDate) {
                     selectedDate.compareTo(date) == 0
                 }
                 Column(
@@ -88,7 +96,7 @@ fun CalendarBasic(
                         onSelectedDate = { onSelectedDate(it) }
                     )
                     Text(
-                        text = expenseList.find { it.date == (day + 1).toString() }?.let {
+                        text = expenseList.find { it.toLocalDate() == date }?.let {
                             (it.totalEarning - it.totalExpense).toString()
                         } ?: "",
                         style = MaterialTheme.typography.departureNormal(8),
@@ -138,7 +146,8 @@ private fun CalendarDay(
 private fun MonthHeadComponent(
     monthHeadText: String,
     onPrevMonthClick: () -> Unit,
-    onNextMonthClick: () -> Unit
+    onNextMonthClick: () -> Unit,
+    onTitleClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -159,6 +168,10 @@ private fun MonthHeadComponent(
             contentDescription = ""
         )
         Text(
+            modifier = Modifier
+                .clip(shape = Radius10)
+                .clickableSingle { onTitleClick() }
+                .padding(horizontal = 12.dp, vertical = 8.dp),
             text = monthHeadText,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.semiBold(18)
@@ -200,16 +213,18 @@ private fun DayOfWeekStandardComponent(
 @Preview(showBackground = true)
 @Composable
 private fun CalendarViewPreview() {
-    val localDate = remember { mutableStateOf(LocalDate.now()) }
+    val baseDay = 10
+    val startDate = remember { mutableStateOf(LocalDate.now().baseDayWindowStart(baseDay)) }
     val selectedDate = remember { mutableStateOf(LocalDate.now()) }
 
     CalendarBasic(
         expenseList = listOf(),
-        baseDate = localDate.value,
+        startDate = startDate.value,
+        endDate = startDate.value.baseDayWindowEnd(baseDay),
         selectedDate = selectedDate.value,
-        firstDayOfWeek = localDate.value.withDayOfMonth(1).dayOfWeek.toCalendarDayOfWeek().ordinal,
-        onPrevMonthClick = { localDate.value = localDate.value.minusMonths(1) },
-        onNextMonthClick = { localDate.value = localDate.value.plusMonths(1) },
+        firstDayOfWeek = startDate.value.dayOfWeek.toCalendarDayOfWeek().ordinal,
+        onPrevMonthClick = { startDate.value = startDate.value.minusDays(1).baseDayWindowStart(baseDay) },
+        onNextMonthClick = { startDate.value = startDate.value.baseDayWindowEnd(baseDay).plusDays(1) },
         onSelectedDate = { selectedDate.value = it }
     )
 }

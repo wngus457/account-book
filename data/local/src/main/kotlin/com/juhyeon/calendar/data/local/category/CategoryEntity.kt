@@ -11,14 +11,18 @@ data class CategoryEntity(
     @ColumnInfo(name = "categoryKey")
     val categoryKey: Int = 0,
     @ColumnInfo(name = "name")
-    val name: String
+    val name: String,
+    @ColumnInfo(name = "icon")
+    val icon: String
 )
 
 internal fun CategoryEntity.toData() = CategoryData(
     categoryKey = categoryKey.toString(),
-    name = name
+    name = name,
+    icon = icon
 )
 
 internal fun CategoryData.toEntity() = CategoryEntity(
-    name = name
+    name = name,
+    icon = icon
 )

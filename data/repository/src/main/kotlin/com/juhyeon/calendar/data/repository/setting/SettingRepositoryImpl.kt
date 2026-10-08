@@ -16,4 +16,10 @@ class SettingRepositoryImpl @Inject constructor(
     }
 
     override fun getFirstAppStart(): Flow<Result<Boolean>> = settingLocalDataSource.getFirstAppStart().mapToResult()
+
+    override fun setBaseDay(day: Int): Flow<Result<Unit>> = flow {
+        emit(Result.Success(settingLocalDataSource.setBaseDay(day)))
+    }
+
+    override fun getBaseDay(): Flow<Result<Int>> = settingLocalDataSource.getBaseDay().mapToResult()
 }

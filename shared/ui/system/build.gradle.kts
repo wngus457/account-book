@@ -19,8 +19,6 @@ dependencies {
 
     implementation(libs.accompanist.permission)
 
-    implementation(libs.bundles.glide)
-
     implementation(libs.lottie.compose)
     implementation(libs.serialization)
 }

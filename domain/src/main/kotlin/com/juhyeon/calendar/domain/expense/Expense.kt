@@ -1,5 +1,7 @@
 package com.juhyeon.calendar.domain.expense
 
+import java.time.LocalDate
+
 data class Expense(
     val key: String,
     val year: String,
@@ -17,3 +19,6 @@ data class Expense(
         val isExpenditure: Boolean
     )
 }
+
+/** year/month/date는 zero-pad 되지 않은 문자열이라 날짜 비교는 항상 이걸 거친다. */
+fun Expense.toLocalDate(): LocalDate = LocalDate.of(year.toInt(), month.toInt(), date.toInt())

@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import com.juhyeon.calendar.data.repository.setting.SettingLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -24,7 +25,19 @@ class SettingLocalDataSourceImpl @Inject constructor(
         .take(1)
         .map { preferences -> preferences[booleanPreferencesKey(APP_KEY)] ?: true }
 
+    override suspend fun setBaseDay(day: Int) {
+        dataStore.edit { preferences ->
+            preferences[intPreferencesKey(BASE_DAY_KEY)] = day
+        }
+    }
+
+    // take(1) 없음 - 기준일을 바꾸면 캘린더가 바로 다시 그려져야 하므로 계속 구독한다.
+    override fun getBaseDay(): Flow<Int> = dataStore.data
+        .map { preferences -> preferences[intPreferencesKey(BASE_DAY_KEY)] ?: DEFAULT_BASE_DAY }
+
     companion object {
         const val APP_KEY = "is_first_app_start"
+        const val BASE_DAY_KEY = "calendar_base_day"
+        const val DEFAULT_BASE_DAY = 1
     }
 }

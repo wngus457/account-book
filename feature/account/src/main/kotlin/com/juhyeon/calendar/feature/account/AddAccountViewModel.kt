@@ -5,10 +5,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.juhyeon.calendar.domain.category.Category
+import com.juhyeon.calendar.domain.category.get.GetCategoryListUseCase
 import com.juhyeon.calendar.domain.expense.Expense
 import com.juhyeon.calendar.domain.expense.insert.InsertExpenseUseCase
 import com.juhyeon.calendar.domain.onError
 import com.juhyeon.calendar.domain.onSuccess
+import com.juhyeon.calendar.shared.core.mvi.BaseViewModel
 import com.juhyeon.calendar.shared.core.mvi.MviReducer
 import com.juhyeon.calendar.shared.navigation.AddAccount
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,18 +23,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AddAccountViewModel @Inject constructor(
     private val state: SavedStateHandle,
-    private val insertExpenseUseCase: InsertExpenseUseCase
-) : ViewModel() {
-
-    private val reducer = MviReducer<AddAccountContract.Event, AddAccountContract.State, AddAccountContract.Effect>(
-        viewModelScope = viewModelScope,
-        initialState = initState(),
-        handleEvent = ::handleEvent
-    )
-
-    val eventHandler = reducer::setEvent
-    val stateFlow = reducer.stateFlow
-    val effectFlow = reducer.effectFlow
+    private val insertExpenseUseCase: InsertExpenseUseCase,
+    getCategoryListUseCase: GetCategoryListUseCase
+) : BaseViewModel<AddAccountContract.Event, AddAccountContract.State, AddAccountContract.Effect>() {
 
     private val year = state.toRoute<AddAccount>().year
     private val month = state.toRoute<AddAccount>().month
@@ -41,10 +35,20 @@ class AddAccountViewModel @Inject constructor(
     val price = mutableStateOf("0")
     val memo = mutableStateOf("")
     val category = mutableStateOf("0")
+    val categories = mutableStateOf(emptyList<Category>())
 
-    private fun initState() = AddAccountContract.State()
+    init {
+        getCategoryListUseCase()
+            .onSuccess {
+                categories.value = it
+                if (category.value == "0") category.value = it.firstOrNull()?.categoryKey ?: "0"
+            }
+            .launchIn(viewModelScope)
+    }
 
-    private fun handleEvent(event: AddAccountContract.Event) {
+    override fun initState() = AddAccountContract.State()
+
+    override fun handleEvent(event: AddAccountContract.Event) {
         when (event) {
             is AddAccountContract.Event.OnBackClick -> reducer.setEffect(AddAccountContract.Effect.NavigateToBack)
             is AddAccountContract.Event.OnKeyClick -> changePrice(event.key)
