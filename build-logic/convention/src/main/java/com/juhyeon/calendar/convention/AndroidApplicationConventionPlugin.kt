@@ -30,7 +30,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     applicationId = "com.juhyeon.calendar"
                     versionCode = AppConfig.versionCode
                     versionName = AppConfig.versionName
-                    targetSdk = 35
+                    targetSdk = 36
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                     vectorDrawables.useSupportLibrary = true
                 }
