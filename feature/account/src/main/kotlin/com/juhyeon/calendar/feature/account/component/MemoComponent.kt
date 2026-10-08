@@ -1,0 +1,83 @@
+package com.juhyeon.calendar.feature.account.component
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.juhyeon.calendar.shared.ui.system.theme.theme.bold
+import com.juhyeon.calendar.shared.ui.system.theme.theme.medium
+
+@Composable
+internal fun MemoComponent(
+    text: String = "",
+    onValueChange: (String) -> Unit = { }
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = buildAnnotatedString {
+                append("메모")
+                withStyle(
+                    style = SpanStyle(color = Color(0xFFC8C8C8), fontWeight = FontWeight.Medium)
+                ) {
+                    append(" (선택)")
+                }
+            },
+            color = Color(0xFF7A7A7A),
+            style = MaterialTheme.typography.bold(13)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(76.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color(0xFFF6F6F6))
+                .padding(vertical = 14.dp, horizontal = 16.dp)
+        ) {
+            BasicTextField(
+                modifier = Modifier.fillMaxSize(),
+                value = text,
+                textStyle = MaterialTheme.typography.medium(14),
+                decorationBox = { innerTextField ->
+                    if (text.isEmpty()) {
+                        Text(
+                            text = "메모를 입력하세요.",
+                            color = Color(0xFFC8C8C8),
+                            style = MaterialTheme.typography.medium(14)
+                        )
+                    }
+                    innerTextField()
+                },
+                onValueChange = onValueChange
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun MemoComponentPreview() {
+    MemoComponent(
+        text = ""
+    )
+}

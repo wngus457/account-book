@@ -58,18 +58,21 @@ class SplashViewModel @Inject constructor(
 
     private fun setCategory() {
         val categories = listOf(
-            Category(
-                categoryKey = "0",
-                name = "식비"
-            ),
-            Category(
-                categoryKey = "0",
-                name = "교통비"
-            ),
-            Category(
-                categoryKey = "0",
-                name = "기타"
-            )
+            Category(name = "식비", icon = "meal"),
+            Category(name = "교통비", icon = "car"),
+            Category(name = "쇼핑", icon = "cart"),
+            Category(name = "외식", icon = "pizza"),
+            Category(name = "주거", icon = "apartment"),
+            Category(name = "의료", icon = "medical"),
+            Category(name = "교육", icon = "book"),
+            Category(name = "육아", icon = "baby"),
+            Category(name = "운동", icon = "exercise"),
+            Category(name = "취미", icon = "game"),
+            Category(name = "여행", icon = "airplane"),
+            Category(name = "저축", icon = "savings"),
+            Category(name = "투자", icon = "stock"),
+            Category(name = "상금", icon = "trophy"),
+            Category(name = "기타", icon = "money")
         )
         insertCategoriesUseCase(categories)
             .onSuccess { Log.e("테스트", categories.toString()) }

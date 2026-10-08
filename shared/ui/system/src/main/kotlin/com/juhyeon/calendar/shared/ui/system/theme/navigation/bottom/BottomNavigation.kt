@@ -1,7 +1,10 @@
 package com.juhyeon.calendar.shared.ui.system.theme.navigation.bottom
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -32,11 +35,12 @@ fun <T : BottomNavItem> BottomNavigation(
         .Builder()
         .setLaunchSingleTop(true)
         .setRestoreState(true)
+    val navigationBarHeight = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
 
     NavigationBar(
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)
+            .height(56.dp + navigationBarHeight)
             .shadow(elevation = 8.dp),
         containerColor = White100,
         contentColor = White100

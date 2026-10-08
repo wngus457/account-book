@@ -41,11 +41,8 @@ okhttp = "5.1.0"
 
 # Util
 moshi-kotlin = "1.15.2"
-glide = "4.15.1"
 core-ktx = "1.16.0"
 core-ktx-version = "1.10.1"
-junit = "4.13.2"
-junit-version = "1.1.5"
 espresso-core = "3.5.1"
 material = "1.12.0"
 
@@ -91,6 +88,7 @@ app-review = { group = "com.google.android.play", name = "review-ktx", version.r
 
 java-inject = { group = "javax.inject", name = "javax.inject", version.ref = "java-inject" }
 
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 coroutine-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
 coroutine-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutine" }
@@ -103,12 +101,8 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi-kotlin" }
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -127,11 +121,6 @@ compose = [
     "compose-runtime",
     "compose-runtime-tracing",
     "compose-hilt-navigation"
-]
-
-glide = [
-    "glide",
-    "glide-compiler"
 ]
 
 retrofit = [
