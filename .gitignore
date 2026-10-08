@@ -162,3 +162,7 @@ fabric.properties
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/codeStyles/Project.xml
 /.idea/appInsightsSettings.xml
+
+# IDE / OS
+.idea/
+.DS_Store

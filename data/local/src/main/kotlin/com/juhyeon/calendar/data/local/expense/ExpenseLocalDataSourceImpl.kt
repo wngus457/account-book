@@ -14,6 +14,7 @@ class ExpenseLocalDataSourceImpl @Inject constructor(
         val value = data.expenseList.firstOrNull()
         value?.let { item ->
             val entity = ExpenseEntity(
+                key = item.key.toLongOrNull() ?: 0L,  // 기존 키면 REPLACE로 수정
                 year = data.year,
                 month = data.month,
                 date = data.date,
@@ -35,6 +36,7 @@ class ExpenseLocalDataSourceImpl @Inject constructor(
                 val expenseList = groupedByDate.map { (date, entities) ->
                     val expenseItems = entities.map { entity ->
                         ExpenseData.ExpenseItem(
+                            key = entity.key.toString(),
                             price = entity.money,
                             time = entity.time,
                             category = entity.categoryNumber.toString(),

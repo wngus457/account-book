@@ -9,6 +9,7 @@ data class HomeUiModel(
     val expenseList: List<ExpenseItem>
 ) {
     data class ExpenseItem(
+        val key: String,
         val price: Long,
         val time: String,
         val memo: String,
@@ -21,6 +22,7 @@ internal fun Expense.toUiModel(categoryMap: Map<String, Category>) = HomeUiModel
     expense = this,
     expenseList = expenseList.map { item ->
         HomeUiModel.ExpenseItem(
+            key = item.key,
             price = item.price,
             time = item.time,
             memo = item.memo,
