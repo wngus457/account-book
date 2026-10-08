@@ -46,6 +46,7 @@ fun AddAccountScreen(
     }
     AddAccountContents(
         state = state,
+        isEdit = addAccountViewModel.isEdit,
         isExpenditure = addAccountViewModel.isExpenditure.value,
         price = addAccountViewModel.price.value,
         memo = addAccountViewModel.memo.value,
@@ -63,6 +64,7 @@ fun AddAccountScreen(
 @Composable
 private fun AddAccountContents(
     state: AddAccountContract.State,
+    isEdit: Boolean = false,
     isExpenditure: Boolean,
     price: String,
     memo: String,
@@ -79,7 +81,7 @@ private fun AddAccountContents(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopNavigationTitleClose(
-                title = "내역 추가",
+                title = if (isEdit) "내역 수정" else "내역 추가",
                 onCloseClick = { onBackClick() }
             )
         },

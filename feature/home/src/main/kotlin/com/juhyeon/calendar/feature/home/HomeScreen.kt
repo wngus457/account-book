@@ -32,11 +32,11 @@ import androidx.navigation.NavHostController
 import com.juhyeon.calendar.domain.category.Category
 import com.juhyeon.calendar.domain.expense.Expense
 import com.juhyeon.calendar.domain.expense.toLocalDate
+import com.juhyeon.calendar.feature.home.data.HomeUiModel
 import com.juhyeon.calendar.feature.home.data.toUiModel
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowEnd
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
 import com.juhyeon.calendar.feature.home.component.BaseDayModal
-import com.juhyeon.calendar.shared.navigation.AddAccount
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
 import com.juhyeon.calendar.shared.ui.common.util.OnLifecycleEvent
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.CalendarBasic
@@ -65,7 +65,7 @@ fun HomeScreen(
     LaunchedEffect(true) {
         homeViewModel.effectFlow.collect { effect ->
             when (effect) {
-                is HomeContract.Effect.NavigateToAddAccount -> navController.navigate(AddAccount(effect.year, effect.month, effect.date))
+                is HomeContract.Effect.NavigateToAddAccount -> navController.navigate(effect.route)
             }
         }
     }
@@ -78,6 +78,7 @@ fun HomeScreen(
         selectDate = homeViewModel.selectDate.value,
         onSelectDate = { postEvent(HomeContract.Event.OnSelectDate(it)) },
         onAddAccountClick = { postEvent(HomeContract.Event.OnAddAccountClick) },
+        onReceiptClick = { postEvent(HomeContract.Event.OnReceiptClick(it)) },
         onPrevWindow = { postEvent(HomeContract.Event.OnPrevWindow) },
         onNextWindow = { postEvent(HomeContract.Event.OnNextWindow) },
         onBaseDayClick = { showBaseDayModal = true }
@@ -102,6 +103,7 @@ private fun HomeContents(
     selectDate: LocalDate,
     onSelectDate: (LocalDate) -> Unit,
     onAddAccountClick: () -> Unit,
+    onReceiptClick: (HomeUiModel.ExpenseItem) -> Unit = { },
     onPrevWindow: () -> Unit,
     onNextWindow: () -> Unit,
     onBaseDayClick: () -> Unit
@@ -142,7 +144,10 @@ private fun HomeContents(
                     modifier = Modifier.weight(1f)
                 ) {
                     items(state.uiState.expenseList.find { it.expense.toLocalDate() == selectDate }?.expenseList ?: listOf()) {
-                        ReceiptItem(it)
+                        ReceiptItem(
+                            expenseItem = it,
+                            onClick = { onReceiptClick(it) }
+                        )
                     }
                     item {
                         DashedLine(modifier = Modifier.padding(vertical = 6.dp))

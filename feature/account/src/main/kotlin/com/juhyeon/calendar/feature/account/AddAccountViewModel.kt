@@ -27,14 +27,16 @@ class AddAccountViewModel @Inject constructor(
     getCategoryListUseCase: GetCategoryListUseCase
 ) : BaseViewModel<AddAccountContract.Event, AddAccountContract.State, AddAccountContract.Effect>() {
 
-    private val year = state.toRoute<AddAccount>().year
-    private val month = state.toRoute<AddAccount>().month
-    private val date = state.toRoute<AddAccount>().date
+    private val route = state.toRoute<AddAccount>()
+    private val year = route.year
+    private val month = route.month
+    private val date = route.date
 
-    val isExpenditure = mutableStateOf(true)
-    val price = mutableStateOf("0")
-    val memo = mutableStateOf("")
-    val category = mutableStateOf("0")
+    val isEdit = route.expenseKey.isNotEmpty()
+    val isExpenditure = mutableStateOf(route.isExpenditure)
+    val price = mutableStateOf(route.price.toString())
+    val memo = mutableStateOf(route.memo)
+    val category = mutableStateOf(route.categoryKey)
     val categories = mutableStateOf(emptyList<Category>())
 
     init {
@@ -82,7 +84,8 @@ class AddAccountViewModel @Inject constructor(
         val priceValue = price.value.toLongOrNull() ?: 0L
         if (priceValue <= 0) return
 
-        val currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+        // 수정이면 원래 시간을 유지한다.
+        val time = route.time.ifEmpty { LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) }
 
         val expense = Expense(
             key = "",
@@ -91,8 +94,9 @@ class AddAccountViewModel @Inject constructor(
             date = date,
             expenseList = listOf(
                 Expense.ExpenseItem(
+                    key = route.expenseKey,
                     price = priceValue,
-                    time = currentTime,
+                    time = time,
                     category = category.value,
                     memo = memo.value,
                     isExpenditure = isExpenditure.value

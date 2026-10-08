@@ -12,6 +12,7 @@ data class ExpenseData(
     val totalEarning: Long
 ) {
     data class ExpenseItem(
+        val key: String = "",
         val price: Long,
         val time: String,
         val category: String,
@@ -41,6 +42,7 @@ internal fun Expense.toData() = ExpenseData(
 )
 
 private fun ExpenseData.ExpenseItem.toDomain() = Expense.ExpenseItem(
+    key = key,
     price = price,
     time = time,
     category = category,
@@ -49,6 +51,7 @@ private fun ExpenseData.ExpenseItem.toDomain() = Expense.ExpenseItem(
 )
 
 private fun Expense.ExpenseItem.toData() = ExpenseData.ExpenseItem(
+    key = key,
     price = price,
     time = time,
     category = category,

@@ -12,6 +12,7 @@ data class Expense(
     val totalEarning: Long
 ) {
     data class ExpenseItem(
+        val key: String = "",  // 비어 있으면 새 내역
         val price: Long,
         val time: String,
         val category: String,

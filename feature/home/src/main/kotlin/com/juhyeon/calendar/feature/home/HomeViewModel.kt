@@ -16,7 +16,9 @@ import com.juhyeon.calendar.domain.setting.baseday.SetBaseDayUseCase
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowEnd
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
 import com.juhyeon.calendar.domain.successOr
+import com.juhyeon.calendar.feature.home.data.HomeUiModel
 import com.juhyeon.calendar.feature.home.data.toUiModel
+import com.juhyeon.calendar.shared.navigation.AddAccount
 import com.juhyeon.calendar.shared.core.mvi.MviReducer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.combine
@@ -70,7 +72,8 @@ class HomeViewModel @Inject constructor(
         when (event) {
             is HomeContract.Event.OnResume -> refresher()
             is HomeContract.Event.OnSelectDate -> onSelectDate(event.param)
-            is HomeContract.Event.OnAddAccountClick -> dateSeparation(selectDate.value)
+            is HomeContract.Event.OnAddAccountClick -> reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(addAccountRoute()))
+            is HomeContract.Event.OnReceiptClick -> onReceiptClick(event.item)
             is HomeContract.Event.OnPrevWindow -> moveWindow(windowStart.value.minusDays(1).baseDayWindowStart(baseDay.value))
             is HomeContract.Event.OnNextWindow -> moveWindow(windowEnd().plusDays(1))
             is HomeContract.Event.OnChangeBaseDay -> setBaseDayUseCase(event.day).launchIn(viewModelScope)
@@ -125,11 +128,25 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun dateSeparation(localDate: LocalDate) {
-        val year = localDate.year.toString()
-        val month = localDate.month.value.toString()
-        val date = localDate.dayOfMonth.toString()
-        reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(year = year, month = month, date = date))
+    private fun addAccountRoute(): AddAccount {
+        val localDate = selectDate.value
+        return AddAccount(
+            year = localDate.year.toString(),
+            month = localDate.month.value.toString(),
+            date = localDate.dayOfMonth.toString()
+        )
+    }
+
+    private fun onReceiptClick(item: HomeUiModel.ExpenseItem) {
+        val route = addAccountRoute().copy(
+            expenseKey = item.key,
+            price = item.price,
+            time = item.time,
+            memo = item.memo,
+            categoryKey = item.category?.categoryKey ?: "0",
+            isExpenditure = item.isExpenditure
+        )
+        reducer.setEffect(HomeContract.Effect.NavigateToAddAccount(route))
     }
 
     private fun onSelectDate(date: LocalDate) {

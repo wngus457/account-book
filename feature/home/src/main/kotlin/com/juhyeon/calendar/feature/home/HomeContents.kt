@@ -32,12 +32,13 @@ import com.juhyeon.calendar.shared.util.kotlin.extension.applyCommaFormat
 
 @Composable
 internal fun ReceiptItem(
-    expenseItem: HomeUiModel.ExpenseItem
+    expenseItem: HomeUiModel.ExpenseItem,
+    onClick: () -> Unit = { }
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickableSingle {  }
+            .clickableSingle { onClick() }
             .padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -71,7 +72,7 @@ internal fun ReceiptItem(
         }
         Text(
             modifier = Modifier.weight(1f),
-            text = expenseItem.price.applyCommaFormat(),
+            text = (if (expenseItem.isExpenditure) "-" else "+") + expenseItem.price.applyCommaFormat(),
             maxLines = 1,
             textAlign = TextAlign.End,
             overflow = TextOverflow.Ellipsis,
@@ -87,6 +88,7 @@ private fun ReceiptItemPreview() {
     Column {
         ReceiptItem(
             HomeUiModel.ExpenseItem(
+                key = "1",
                 price = 1000L,
                 time = "2025-01-01",
                 memo = "메모",
@@ -96,6 +98,7 @@ private fun ReceiptItemPreview() {
         )
         ReceiptItem(
             HomeUiModel.ExpenseItem(
+                key = "1",
                 price = 1000L,
                 time = "2025-01-01",
                 memo = "메모",
