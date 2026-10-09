@@ -16,7 +16,7 @@ sealed class NavigationRouteId {
     data object Setting : NavigationRouteId()
 
     @Serializable
-    data object History : NavigationRouteId()
+    data object Chart : NavigationRouteId()
 }
 
 @Serializable

@@ -15,7 +15,6 @@ interface HomeContract {
         data class OnReceiptClick(val item: HomeUiModel.ExpenseItem) : Event
         data object OnPrevWindow : Event
         data object OnNextWindow : Event
-        data class OnChangeBaseDay(val day: Int) : Event
     }
 
     data class State(

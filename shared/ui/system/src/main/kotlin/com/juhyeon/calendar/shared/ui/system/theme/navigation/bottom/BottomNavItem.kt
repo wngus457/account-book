@@ -24,10 +24,10 @@ sealed class BottomNavItem(
         unselectedIcon = BottomNavUnSelectedHome
     )
 
-    data object History : BottomNavItem(
+    data object Chart : BottomNavItem(
         order = 2,
-        routeId = NavigationRouteId.History,
-        name = "내역",
+        routeId = NavigationRouteId.Chart,
+        name = "분석",
         selectedIcon = BottomNavSelectedHistory,
         unselectedIcon = BottomNavUnSelectedHistory
     )
