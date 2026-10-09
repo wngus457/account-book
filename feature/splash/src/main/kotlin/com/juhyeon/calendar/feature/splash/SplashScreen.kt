@@ -25,7 +25,9 @@ fun SplashScreen(
         splashViewModel.effectFlow.collect { effect ->
             when (effect) {
                 SplashContract.Effect.NavigateToBack -> navController.popBackStack()
-                SplashContract.Effect.NavigateToHome -> navController.navigate(NavigationRouteId.Home)
+                SplashContract.Effect.NavigateToHome -> navController.navigate(NavigationRouteId.Home) {
+                    popUpTo<NavigationRouteId.Splash> { inclusive = true }
+                }
             }
         }
     }

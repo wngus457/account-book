@@ -1,4 +1,4 @@
-package com.juhyeon.calendar.feature.home.component
+package com.juhyeon.calendar.feature.setting.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

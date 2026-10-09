@@ -12,7 +12,6 @@ import com.juhyeon.calendar.domain.expense.toLocalDate
 import com.juhyeon.calendar.domain.onSuccess
 import com.juhyeon.calendar.domain.setting.baseday.DEFAULT_BASE_DAY
 import com.juhyeon.calendar.domain.setting.baseday.GetBaseDayUseCase
-import com.juhyeon.calendar.domain.setting.baseday.SetBaseDayUseCase
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowEnd
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
 import com.juhyeon.calendar.domain.successOr
@@ -33,7 +32,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getMonthExpenseListUseCase: GetMonthExpenseListUseCase,
     private val getBaseDayUseCase: GetBaseDayUseCase,
-    private val setBaseDayUseCase: SetBaseDayUseCase,
     private val getCategoryListUseCase: GetCategoryListUseCase
 ) : ViewModel() {
 
@@ -54,7 +52,7 @@ class HomeViewModel @Inject constructor(
     val selectDate = mutableStateOf(LocalDate.now())
 
     init {
-        // 기준일 Flow는 계속 구독 상태라 모달에서 값을 바꾸면 여기로 다시 흘러와 윈도우가 재계산된다.
+        // 기준일 Flow는 계속 구독 상태라 설정 화면에서 값을 바꾸면 여기로 다시 흘러와 윈도우가 재계산된다.
         getBaseDayUseCase()
             .onSuccess { day ->
                 baseDay.value = day
@@ -76,7 +74,6 @@ class HomeViewModel @Inject constructor(
             is HomeContract.Event.OnReceiptClick -> onReceiptClick(event.item)
             is HomeContract.Event.OnPrevWindow -> moveWindow(windowStart.value.minusDays(1).baseDayWindowStart(baseDay.value))
             is HomeContract.Event.OnNextWindow -> moveWindow(windowEnd().plusDays(1))
-            is HomeContract.Event.OnChangeBaseDay -> setBaseDayUseCase(event.day).launchIn(viewModelScope)
         }
     }
 

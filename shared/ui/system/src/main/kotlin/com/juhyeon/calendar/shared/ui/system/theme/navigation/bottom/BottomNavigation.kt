@@ -70,7 +70,16 @@ fun <T : BottomNavItem> BottomNavigation(
                 selected = currentDestination?.route == item.routeId::class.qualifiedName,
                 alwaysShowLabel = true,
                 onClick = {
-
+                    navController.navigate(
+                        route = item.routeId,
+                        navOptions = navOptionsBuilder
+                            .setPopUpTo(
+                                destinationId = navController.graph.id,
+                                inclusive = false,
+                                saveState = true
+                            )
+                            .build()
+                    )
                 }
             )
         }

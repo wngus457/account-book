@@ -71,6 +71,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     add("implementation", project(":feature:splash"))
                     add("implementation", project(":feature:home"))
                     add("implementation", project(":feature:account"))
+                    add("implementation", project(":feature:setting"))
 
                     add("implementation", project(":shared:core-mvi"))
                     add("implementation", project(":shared:navigation"))

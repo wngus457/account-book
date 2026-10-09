@@ -16,10 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,7 +32,6 @@ import com.juhyeon.calendar.feature.home.data.HomeUiModel
 import com.juhyeon.calendar.feature.home.data.toUiModel
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowEnd
 import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
-import com.juhyeon.calendar.feature.home.component.BaseDayModal
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
 import com.juhyeon.calendar.shared.ui.common.util.OnLifecycleEvent
 import com.juhyeon.calendar.shared.ui.system.theme.calendar.CalendarBasic
@@ -69,7 +64,6 @@ fun HomeScreen(
             }
         }
     }
-    var showBaseDayModal by remember { mutableStateOf(false) }
 
     HomeContents(
         state = state,
@@ -80,18 +74,7 @@ fun HomeScreen(
         onAddAccountClick = { postEvent(HomeContract.Event.OnAddAccountClick) },
         onReceiptClick = { postEvent(HomeContract.Event.OnReceiptClick(it)) },
         onPrevWindow = { postEvent(HomeContract.Event.OnPrevWindow) },
-        onNextWindow = { postEvent(HomeContract.Event.OnNextWindow) },
-        onBaseDayClick = { showBaseDayModal = true }
-    )
-
-    BaseDayModal(
-        show = showBaseDayModal,
-        baseDay = homeViewModel.baseDay.value,
-        onConfirm = {
-            postEvent(HomeContract.Event.OnChangeBaseDay(it))
-            showBaseDayModal = false
-        },
-        onDismiss = { showBaseDayModal = false }
+        onNextWindow = { postEvent(HomeContract.Event.OnNextWindow) }
     )
 }
 
@@ -105,8 +88,7 @@ private fun HomeContents(
     onAddAccountClick: () -> Unit,
     onReceiptClick: (HomeUiModel.ExpenseItem) -> Unit = { },
     onPrevWindow: () -> Unit,
-    onNextWindow: () -> Unit,
-    onBaseDayClick: () -> Unit
+    onNextWindow: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -128,7 +110,6 @@ private fun HomeContents(
                     firstDayOfWeek = windowStart.dayOfWeek.toCalendarDayOfWeek().ordinal,
                     onPrevMonthClick = onPrevWindow,
                     onNextMonthClick = onNextWindow,
-                    onTitleClick = onBaseDayClick,
                     onSelectedDate = { onSelectDate(it) }
                 )
                 HorizontalDivider()
@@ -279,7 +260,6 @@ private fun HomeContentsPreview() {
         onSelectDate = { },
         onAddAccountClick = { },
         onPrevWindow = { },
-        onNextWindow = { },
-        onBaseDayClick = { }
+        onNextWindow = { }
     )
 }
