@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.juhyeon.calendar.feature.chart.ChartRoute
 import com.juhyeon.calendar.feature.setting.SettingRoute
 import com.juhyeon.calendar.feature.splash.SplashScreen
 import com.juhyeon.calendar.network.NetworkContract
@@ -57,6 +58,9 @@ fun RootNavGraph(
         homeGraph(navController)
         noAnimComposable<NavigationRouteId.Setting> {
             SettingRoute(navController)
+        }
+        noAnimComposable<NavigationRouteId.Chart> {
+            ChartRoute(navController)
         }
     }
 }
