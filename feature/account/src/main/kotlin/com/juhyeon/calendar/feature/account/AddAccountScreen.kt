@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.juhyeon.calendar.feature.account.component.AccountButtonComponent
 import com.juhyeon.calendar.domain.category.Category
+import com.juhyeon.calendar.feature.account.component.BottomButton
 import com.juhyeon.calendar.feature.account.component.CategoryComponent
 import com.juhyeon.calendar.feature.account.component.InputAmountComponent
 import com.juhyeon.calendar.feature.account.component.MemoComponent
@@ -85,6 +86,12 @@ private fun AddAccountContents(
                 onCloseClick = { onBackClick() }
             )
         },
+        bottomBar = {
+            BottomButton(
+                enabled = price.isNotEmpty() && price != "0",
+                onClick = { onSaveClick() }
+            )
+        },
         containerColor = White100
     ) {
         Column(
@@ -116,13 +123,6 @@ private fun AddAccountContents(
             MemoComponent(
                 text = memo,
                 onValueChange = onMemoChange
-            )
-
-            ButtonBasic(
-                text = "입력",
-                textStyle = MaterialTheme.typography.bold(30),
-                flexible = ButtonFlexible.False,
-                onClick = { onSaveClick() }
             )
         }
     }

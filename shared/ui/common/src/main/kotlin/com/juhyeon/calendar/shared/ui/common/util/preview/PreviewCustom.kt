@@ -52,3 +52,12 @@ annotation class VerticalPreview
     showBackground = true
 )
 annotation class HorizontalPreview
+
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "fold light theme",
+    widthDp = 692,
+    heightDp = 717,
+    showBackground = true
+)
+annotation class FoldPreview

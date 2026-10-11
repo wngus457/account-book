@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray400
 import com.juhyeon.calendar.shared.ui.system.theme.theme.medium
 import com.juhyeon.calendar.shared.ui.system.theme.theme.semiBold
@@ -18,7 +19,8 @@ import com.juhyeon.calendar.shared.ui.system.theme.theme.semiBold
 internal fun SettingItem(
     title: String,
     itemName: String,
-    item: @Composable () -> Unit = { }
+    item: @Composable () -> Unit = { },
+    onClick: () -> Unit = { }
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -30,7 +32,9 @@ internal fun SettingItem(
             color = Gray400
         )
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickableSingleIgnoreInteraction { onClick() },
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(

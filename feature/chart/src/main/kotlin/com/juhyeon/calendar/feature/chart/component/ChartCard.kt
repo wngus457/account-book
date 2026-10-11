@@ -179,7 +179,12 @@ private fun LineChart(
         }
         val line = Path().apply {
             moveTo(points.first().x, points.first().y)
-            points.drop(1).forEach { lineTo(it.x, it.y) }
+            // 제어점을 두 점의 x 중간에 각 점의 y 로 두면 곡선이 두 점 사이 y 범위를 벗어나지 않아
+            // 0원 날도 바닥 아래로 꺼지지 않는다.
+            points.zipWithNext { prev, next ->
+                val midX = (prev.x + next.x) / 2
+                cubicTo(midX, prev.y, midX, next.y, next.x, next.y)
+            }
         }
         val area = Path().apply {
             addPath(line)

@@ -38,7 +38,6 @@ internal fun AccountButtonComponent(
     ) {
         AccountButton(
             text = "지출",
-            selectedColor = Red500,
             isSelected = isExpenditure,
             onChangeExpenditure = { onChangeExpenditure(true) }
         )
@@ -54,7 +53,7 @@ internal fun AccountButtonComponent(
 @Composable
 private fun RowScope.AccountButton(
     text: String = "",
-    selectedColor: Color = Red500,
+    selectedColor: Color = Color(0xFFF4402C),
     isSelected: Boolean = true,
     onChangeExpenditure: () -> Unit = { }
 ) {

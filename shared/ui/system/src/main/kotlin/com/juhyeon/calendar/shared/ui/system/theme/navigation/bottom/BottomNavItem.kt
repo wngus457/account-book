@@ -1,11 +1,9 @@
 package com.juhyeon.calendar.shared.ui.system.theme.navigation.bottom
 
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.juhyeon.calendar.shared.navigation.NavigationRouteId
-import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavSelectedHistory
+import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavChart
 import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavSelectedHome
 import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavSelectedSetting
-import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavUnSelectedHistory
 import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavUnSelectedHome
 import com.juhyeon.calendar.shared.ui.system.theme.icon.BottomNavUnSelectedSetting
 
@@ -13,8 +11,8 @@ sealed class BottomNavItem(
     val order: Int,
     val routeId: NavigationRouteId,
     val name: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector
+    val selectedIcon: Int,
+    val unselectedIcon: Int
 ) {
     data object Home : BottomNavItem(
         order = 1,
@@ -28,8 +26,8 @@ sealed class BottomNavItem(
         order = 2,
         routeId = NavigationRouteId.Chart,
         name = "분석",
-        selectedIcon = BottomNavSelectedHistory,
-        unselectedIcon = BottomNavUnSelectedHistory
+        selectedIcon = BottomNavChart,
+        unselectedIcon = BottomNavChart
     )
 
     data object Setting : BottomNavItem(

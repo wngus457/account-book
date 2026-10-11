@@ -103,6 +103,8 @@ class ChartViewModel @Inject constructor(
 
     private fun publish() {
         val start = windowStart
+        // setState 람다 안에서는 State.isExpenditure 가 우선 해석되므로 지역 변수로 꺼내 둔다.
+        val isExpenditure = isExpenditure
         val days = ChronoUnit.DAYS.between(start, windowEnd()).toInt() + 1
         val items = expenses.flatMap { expense ->
             val date = expense.toLocalDate()

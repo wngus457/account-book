@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
@@ -49,7 +50,7 @@ fun <T : BottomNavItem> BottomNavigation(
             NavigationBarItem(
                 icon = {
                     Icon(
-                        imageVector = if (currentDestination?.route == item.routeId::class.qualifiedName) item.selectedIcon else item.unselectedIcon,
+                        painter = painterResource(if (currentDestination?.route == item.routeId::class.qualifiedName) item.selectedIcon else item.unselectedIcon),
                         contentDescription = item.name
                     )
                 },

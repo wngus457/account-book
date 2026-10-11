@@ -33,7 +33,9 @@ import com.juhyeon.calendar.domain.setting.baseday.baseDayWindowStart
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowBack
 import com.juhyeon.calendar.shared.ui.system.theme.icon.CommonArrowForward
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Blue600
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Gray400
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Red500
 import com.juhyeon.calendar.shared.ui.system.theme.theme.Radius10
 import com.juhyeon.calendar.shared.ui.system.theme.theme.White100
 import com.juhyeon.calendar.shared.ui.system.theme.theme.departureNormal
@@ -95,10 +97,16 @@ fun CalendarBasic(
                         textColor = date.dayOfWeek.toCalendarDayOfWeek().color,
                         onSelectedDate = { onSelectedDate(it) }
                     )
+                    val net = expenseList
+                        .find { it.toLocalDate() == date }
+                        ?.let { it.totalEarning - it.totalExpense }
                     Text(
-                        text = expenseList.find { it.toLocalDate() == date }?.let {
-                            (it.totalEarning - it.totalExpense).toString()
-                        } ?: "",
+                        text = net?.toString() ?: "",
+                        color = when {
+                            net == null || net == 0L -> Color.Unspecified
+                            net < 0 -> Color(0xFFF4402C)
+                            else -> Blue600
+                        },
                         style = MaterialTheme.typography.departureNormal(8),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis

@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.juhyeon.calendar.navigation.RootNavGraph
 import com.juhyeon.calendar.shared.ui.system.theme.navigation.bottom.BottomNavItem
 import com.juhyeon.calendar.shared.ui.system.theme.navigation.bottom.BottomNavigation
@@ -16,12 +18,17 @@ fun MainScreen(
     navController: NavHostController
 ) {
     val list = BottomNavItem::class.sealedSubclasses.map { it.objectInstance as BottomNavItem }.sortedBy { it.order }
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+    val showBottomBar = currentDestination != null && list.any { currentDestination.hasRoute(it.routeId::class) }
+
     Scaffold(
         bottomBar = {
-            BottomNavigation(
-                navList = list,
-                navController = navController
-            )
+            if (showBottomBar) {
+                BottomNavigation(
+                    navList = list,
+                    navController = navController
+                )
+            }
         }
     ) {
         Box(

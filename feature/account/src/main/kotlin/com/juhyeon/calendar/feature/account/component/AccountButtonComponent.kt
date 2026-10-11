@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingle
 import com.juhyeon.calendar.shared.ui.common.extension.clickableSingleIgnoreInteraction
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Blue600
+import com.juhyeon.calendar.shared.ui.system.theme.theme.Red500
 import com.juhyeon.calendar.shared.ui.system.theme.theme.bold
 
 @Composable
@@ -42,6 +44,7 @@ internal fun AccountButtonComponent(
         AccountButton(
             text = "수입",
             isSelected = !isExpenditure,
+            selectedColor = Blue600,
             onChangeExpenditure = { onChangeExpenditure(false) }
         )
     }
@@ -51,10 +54,11 @@ internal fun AccountButtonComponent(
 private fun RowScope.AccountButton(
     text: String = "",
     isSelected: Boolean = true,
+    selectedColor: Color = Color(0xFFF4402C),
     onChangeExpenditure: () -> Unit = { }
 ) {
     val (backgroundColor, textColor) = if (isSelected) {
-        Color(0xFFF4402C) to Color.White
+        selectedColor to Color.White
     } else {
         Color(0xFFF6F6F6) to Color(0xFF7A7A7A)
     }
